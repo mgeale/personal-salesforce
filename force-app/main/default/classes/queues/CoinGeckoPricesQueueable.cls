@@ -1,0 +1,60 @@
+public with sharing class CoinGeckoPricesQueueable implements Queueable, Database.AllowsCallouts {
+  private Id priceBookId;
+
+  public CoinGeckoPricesQueueable(Id priceBookId) {
+    this.priceBookId = priceBookId;
+  }
+
+  public void execute(QueueableContext ctx) {
+    List<String> externalIds = new List<String>();
+    List<Product2> products = [
+      SELECT Id, ExternalId
+      FROM Product2
+      WHERE Family = 'Crypto'
+    ];
+    for (Product2 p : products) {
+      externalIds.add(p.ExternalId);
+    }
+    if (externalIds.size() == 0) {
+      return;
+    }
+    String response = sendRequest(externalIds);
+    if (response == 'Server error') {
+      return;
+    }
+    CoinGeckoParser parsedResponse = CoinGeckoParser.parse(response);
+    List<PricebookEntry> entries = new List<PricebookEntry>();
+    for (Product2 p : products) {
+      CoinGeckoParser.Coin c = parsedResponse.coins.get(p.ExternalId);
+      if (c == null) {
+        continue;
+      }
+      PricebookEntry e = new PricebookEntry();
+      e.Product2Id = p.Id;
+      e.Pricebook2Id = this.priceBookId;
+      e.UnitPrice = c.currencies.get('aud');
+      entries.add(e);
+    }
+    insert entries;
+    System.enqueueJob(new BalanceCreatorQueueable(this.priceBookId));
+  }
+
+  private static String sendRequest(List<String> ids) {
+    Http h = new Http();
+    HttpRequest req = new HttpRequest();
+
+    req.setEndpoint(
+      'https://api.coingecko.com/api/v3/simple/price?ids=' +
+      String.join(ids, ',') +
+      '&vs_currencies=aud'
+    );
+    req.setMethod('GET');
+
+    try {
+      HttpResponse res = h.send(req);
+      return res.getBody();
+    } catch (Exception e) {
+      return 'Server error';
+    }
+  }
+}

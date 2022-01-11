@@ -1,0 +1,14 @@
+<template>
+  <div>
+    <div class="content">
+      <template if:true={treeData}>
+        <lightning-tree
+          items={treeData}
+          title="Products"
+          onselect={handleTreeItemSelected}
+        ></lightning-tree>
+      </template>
+      <template if:true={error}> {error} </template>
+    </div>
+  </div>
+</template>

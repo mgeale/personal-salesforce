@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gains</fullName>
+    <active>true</active>
+    <label>Gains</label>
+    <picklistValues>
+        <picklist>Financial_Year__c</picklist>
+        <values>
+            <fullName>2019%2F2020</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2020%2F2021</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

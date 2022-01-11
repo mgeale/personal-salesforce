@@ -1,0 +1,11 @@
+.space-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.positive {
+  color: green;
+}
+.negative {
+  color: red;
+}
