@@ -10,7 +10,7 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
     List<Product2> products = [
       SELECT Id, ExternalId
       FROM Product2
-      WHERE Family = 'Crypto'
+      WHERE Family = 'Web3'
     ];
     for (Product2 p : products) {
       externalIds.add(p.ExternalId);

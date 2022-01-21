@@ -13,7 +13,7 @@ public class CoinGeckoPricesQueueableTest {
     Product2 p = new Product2();
     p.Name = 'Ethereum';
     p.ExternalId = 'ethereum';
-    p.Family = 'Crypto';
+    p.Family = 'Web3';
     insert p;
 
     Id pricebookId = Test.getStandardPricebookId();
