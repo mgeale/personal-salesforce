@@ -1,6 +1,6 @@
 <template>
-  <template if:true={product}>
-    <article class="slds-card">
+  <article class="slds-card content">
+    <div if:true={product}>
       <div class="slds-card__header slds-grid">
         <header class="slds-media slds-media_center slds-has-flexi-truncate">
           <div class="slds-media__body">
@@ -18,24 +18,10 @@
           <lightning-layout-item>
             <div class="form details">
               <div><label>Total:</label>{totalAmount}</div>
-              <div><label>Size:</label>harvestSize</div>
-              <div><label>Yield:</label>harvestYield lbs</div>
             </div>
           </lightning-layout-item>
         </lightning-layout>
-        <lightning-accordion>
-          <lightning-accordion-section label="History">
-            <lightning-layout>
-              <lightning-layout-item flexibility="grow">
-                <div class="form">
-                  <div><label>Level:</label>19.8%</div>
-                  <div><label>Status:</label>harvestStatus</div>
-                </div>
-              </lightning-layout-item>
-            </lightning-layout>
-          </lightning-accordion-section>
-        </lightning-accordion>
       </div>
-    </article>
-  </template>
+    </div>
+  </article>
 </template>

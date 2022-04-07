@@ -1,7 +1,8 @@
 import { LightningElement, wire } from "lwc";
-import { fireEvent, unregisterAllListeners } from "c/pubsub";
 import { CurrentPageReference } from "lightning/navigation";
+import { publish, MessageContext } from 'lightning/messageService';
 import getProductList from "@salesforce/apex/ProductController.getProductList";
+import PRODUCT_SELECTED_CHANNEL from '@salesforce/messageChannel/Product_Selected__c';
 
 export default class ProductList extends LightningElement {
   empMessage;
@@ -10,6 +11,9 @@ export default class ProductList extends LightningElement {
   treeData;
 
   @wire(CurrentPageReference) pageRef;
+
+  @wire(MessageContext)
+  messageContext;
 
   @wire(getProductList)
   apexProduct({ error, data }) {
@@ -47,14 +51,11 @@ export default class ProductList extends LightningElement {
 
   connectedCallback() {}
 
-  disconnectedCallback() {
-    unregisterAllListeners(this);
-  }
+  disconnectedCallback() {}
 
   handleTreeItemSelected(event) {
-    const recordId = event.detail.name;
-    if (recordId) {
-      fireEvent(this.pageRef, "product__fieldselected", recordId);
-    }
+    const payload = { recordId: event.detail.name };
+
+    publish(this.messageContext, PRODUCT_SELECTED_CHANNEL, payload);
   }
 }
