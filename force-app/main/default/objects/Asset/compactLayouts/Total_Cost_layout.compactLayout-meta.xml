@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Total_Cost_layout</fullName>
     <fields>Name</fields>
     <fields>Quantity__c</fields>
+    <fields>Outstanding_Tax__c</fields>
     <fields>Total_Cost__c</fields>
     <fields>Status</fields>
     <fields>Amount_Taxed_Percentage__c</fields>
-    <fields>Outstanding_Tax__c</fields>
     <label>Total Cost layout</label>
 </CompactLayout>
