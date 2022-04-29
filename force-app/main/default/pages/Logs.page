@@ -1,16 +1,10 @@
-<apex:page
-  standardController="Log__c"
-  extensions="LogExtension"
-  recordSetVar="logs"
-  sidebar="false"
-  lightningStylesheets="true"
->
-  <apex:pageBlock>
-    <apex:pageBlockTable value="{!logs}" var="log">
-      <apex:column value="{!log.Type__c}" />
-      <apex:column value="{!log.Message__c}" />
-      <apex:column value="{!log.Code__c}" />
-      <apex:column value="{!log.CreatedDate}" />
-    </apex:pageBlockTable>
-  </apex:pageBlock>
+<apex:page standardController="Log__c" extensions="LogExtension" recordSetVar="logs" sidebar="false" lightningStylesheets="true">
+     <apex:pageBlock >
+        <apex:pageBlockTable value="{!logs}" var="log">
+           <apex:column value="{!log.Type__c}"/>
+           <apex:column value="{!log.Message__c}"/>
+           <apex:column value="{!log.Code__c}"/>
+           <apex:column value="{!log.CreatedDate}"/>
+        </apex:pageBlockTable>
+     </apex:pageBlock>
 </apex:page>
