@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -148,19 +148,19 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Log</label>
+    <label>Log Event</label>
     <nameField>
-        <displayFormat>LOG-{0000}</displayFormat>
-        <label>Log Name</label>
+        <displayFormat>Log-{00000}</displayFormat>
+        <label>Log Event Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Logs</pluralLabel>
-    <searchLayouts></searchLayouts>
+    <pluralLabel>Log Events</pluralLabel>
+    <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Type__c</fullName>
+    <fullName>Severity__c</fullName>
     <externalId>false</externalId>
-    <label>Type</label>
-    <required>true</required>
+    <label>Severity</label>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -11,19 +11,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Error</fullName>
+                <fullName>DEBUG</fullName>
                 <default>false</default>
-                <label>Error</label>
+                <label>DEBUG</label>
             </value>
             <value>
-                <fullName>Exception</fullName>
+                <fullName>INFO</fullName>
                 <default>false</default>
-                <label>Exception</label>
+                <label>INFO</label>
             </value>
             <value>
-                <fullName>Info</fullName>
+                <fullName>WARN</fullName>
                 <default>false</default>
-                <label>Info</label>
+                <label>WARN</label>
+            </value>
+            <value>
+                <fullName>ERROR</fullName>
+                <default>false</default>
+                <label>ERROR</label>
             </value>
         </valueSetDefinition>
     </valueSet>
