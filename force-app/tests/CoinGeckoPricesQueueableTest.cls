@@ -12,11 +12,14 @@ public class CoinGeckoPricesQueueableTest {
     );
     Test.setMock(HttpCalloutMock.class, mock);
 
-    Product2 p = new Product2();
-    p.Name = 'Ethereum';
-    p.ExternalId = 'ethereum';
-    p.Family = 'Web3';
-    insert p;
+    Product2 p = (Product2) TestDataFactory.createSObject(
+      'Product2',
+      new Map<String, Object>{
+        'Name' => 'Ethereum',
+        'ExternalId' => 'ethereum',
+        'Family' => 'Web3'
+      }
+    );
 
     Id pricebookId = Test.getStandardPricebookId();
 

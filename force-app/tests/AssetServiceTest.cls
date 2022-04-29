@@ -2,12 +2,24 @@
 public class AssetServiceTest {
   @TestSetup
   static void makeData() {
-    Product2 p1 = new Product2(Name = 'Prod1', IsActive = true);
-    insert p1;
-    Product2 p2 = new Product2(Name = 'Prod2', IsActive = true);
-    insert p2;
-    Account a = new Account(Name = 'blah');
-    insert a;
+    Product2 p1 = (Product2) TestDataFactory.createSObject(
+      'Product2',
+      new Map<String, Object>{
+        'Name' => 'Prod1',
+        'IsActive' => true
+      }
+    );
+    Product2 p2 = (Product2) TestDataFactory.createSObject(
+      'Product2',
+      new Map<String, Object>{
+        'Name' => 'Prod2',
+        'IsActive' => true
+      }
+    );
+    Account a = (Account) TestDataFactory.createSObject(
+      'Account',
+      new Map<String, Object>{}
+    );
 
     insert new Asset(
       Quantity__c = 10,
