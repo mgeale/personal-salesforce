@@ -21,11 +21,15 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
     if (externalIds.size() == 0) {
       return;
     }
-    String response = sendRequest(externalIds);
-    if (response == 'Server error') {
+    HttpResponse response = RestClient.makeApiCall(
+      'CoinGecko',
+      RestClient.HttpVerb.GET,
+      '/api/v3/simple/price?ids=' + String.join(externalIds, ',') + '&vs_currencies=aud'
+    );
+    if (response.getStatusCode() != 200) {
       return;
     }
-    CoinGeckoParser parsedResponse = CoinGeckoParser.parse(response);
+    CoinGeckoParser parsedResponse = CoinGeckoParser.parse(response.getBody());
     List<PricebookEntry> entries = new List<PricebookEntry>();
     for (Product2 p : products) {
       CoinGeckoParser.Coin c = parsedResponse.coins.get(p.ExternalId);

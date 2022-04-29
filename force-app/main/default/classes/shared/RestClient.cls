@@ -97,7 +97,7 @@ public virtual class RestClient {
         String body,
         Map<String, String> headers
     ) {
-        path = ensureStringEndsInSlash(path);
+        // path = ensureStringEndsInSlash(path);
         String encodedQuery = EncodingUtil.urlEncode(query, 'UTF-8');
         if (method == HttpVerb.PATCH) {
             method = HttpVerb.POST;
