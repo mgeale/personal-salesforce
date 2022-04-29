@@ -4,17 +4,11 @@ public class AssetServiceTest {
   static void makeData() {
     Product2 p1 = (Product2) TestDataFactory.createSObject(
       'Product2',
-      new Map<String, Object>{
-        'Name' => 'Prod1',
-        'IsActive' => true
-      }
+      new Map<String, Object>{ 'Name' => 'Prod1', 'IsActive' => true }
     );
     Product2 p2 = (Product2) TestDataFactory.createSObject(
       'Product2',
-      new Map<String, Object>{
-        'Name' => 'Prod2',
-        'IsActive' => true
-      }
+      new Map<String, Object>{ 'Name' => 'Prod2', 'IsActive' => true }
     );
     Account a = (Account) TestDataFactory.createSObject(
       'Account',
