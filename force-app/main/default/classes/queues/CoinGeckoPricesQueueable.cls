@@ -1,6 +1,6 @@
 public with sharing class CoinGeckoPricesQueueable implements Queueable, Database.AllowsCallouts {
   private Id priceBookId;
-  
+
   @testVisible
   private static Boolean doChainJob = true;
 
@@ -39,7 +39,7 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
       entries.add(e);
     }
     insert entries;
-    
+
     if (doChainJob) {
       System.enqueueJob(new BalanceCreatorQueueable(this.priceBookId));
     }
