@@ -24,7 +24,9 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
     HttpResponse response = RestClient.makeApiCall(
       'CoinGecko',
       RestClient.HttpVerb.GET,
-      '/api/v3/simple/price?ids=' + String.join(externalIds, ',') + '&vs_currencies=aud'
+      '/api/v3/simple/price?ids=' +
+      String.join(externalIds, ',') +
+      '&vs_currencies=aud'
     );
     if (response.getStatusCode() != 200) {
       return;
@@ -43,7 +45,7 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
       entries.add(e);
     }
     insert entries;
-    
+
     if (doChainJob) {
       System.enqueueJob(new BalanceCreatorQueueable(this.priceBookId));
     }
