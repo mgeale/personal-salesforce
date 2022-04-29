@@ -1,27 +1,8 @@
-/**
- * @description Trigger handler for persisting Platform Event based
- * log messages.
- *
- * @group Trigger Recipes
- * @see Log
- */
-public with sharing class LogTriggerHandler extends TriggerHandler {
-  List<Log__e> incomingRecords = new List<Log__e>();
-
-  /**
-   * @description constructor accepting a list of log__e records
-   */
-  public LogTriggerHandler() {
-    this.incomingRecords = (List<Log__e>) Trigger.new;
-  }
-
-  /**
-   * @description code to be executed in the afterInsert context
-   */
-  override public void afterInsert() {
+public with sharing class LogTriggerHandler {
+  public static void afterInsert(List<Log__e> logs) {
     List<LogEvent__c> events = new List<LogEvent__c>();
 
-    for (Log__e event : this.incomingRecords) {
+    for (Log__e event : logs) {
       events.add(
         new LogEvent__c(
           Log_Data__c = event.Log_Message__c,

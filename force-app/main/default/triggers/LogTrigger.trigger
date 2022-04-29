@@ -1,3 +1,7 @@
 trigger LogTrigger on Log__e(after insert) {
-  new logTriggerHandler().run();
+  switch on Trigger.operationType {
+    when AFTER_INSERT {
+      LogTriggerHandler.afterInsert(Trigger.new);
+    }
+  }
 }
