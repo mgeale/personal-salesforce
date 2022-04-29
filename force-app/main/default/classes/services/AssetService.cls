@@ -8,7 +8,7 @@ public with sharing class AssetService {
     AggregateResult[] groupedResults = [
       SELECT SUM(Quantity__c) Amount, Status, Product2Id
       FROM Asset
-      WHERE Product2Id IN :productIds AND Product2.IsActive = TRUE
+      WHERE Product2Id IN :productIds AND Product2.IsActive = true
       GROUP BY Status, Product2Id
     ];
 

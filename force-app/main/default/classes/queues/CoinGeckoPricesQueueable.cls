@@ -39,7 +39,7 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
       entries.add(e);
     }
     insert entries;
-
+    
     if (doChainJob) {
       System.enqueueJob(new BalanceCreatorQueueable(this.priceBookId));
     }
