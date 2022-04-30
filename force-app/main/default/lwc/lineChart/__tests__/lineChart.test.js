@@ -10,7 +10,7 @@ const LOAD_SCRIPT_ERROR = {
     statusText: 'Bad Request'
 };
 
-describe('c-libs-chartjs', () => {
+describe('c-line-chart', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
@@ -28,50 +28,43 @@ describe('c-libs-chartjs', () => {
     }
 
     it('contains a canvas element for ChartJs', () => {
-        // Create initial element
-        const element = createElement('c-libs-chartjs', {
+        const element = createElement('c-line-chart', {
             is: LineChart
         });
         document.body.appendChild(element);
 
-        // Querying the DOM element that has the lwc:dom directive set.
         const domEl = element.shadowRoot.querySelector('div.chart');
         expect(domEl).not.toBeNull();
     });
 
-    xit('loads the ChartJS javascript and css static resources', () => {
+    it('loads the ChartJS javascript and css static resources', () => {
         const CHARTJS_JS = 'chartJs';
 
-        // Create initial element
-        const element = createElement('c-libs-chartjs', {
+        const element = createElement('c-line-chart', {
             is: LineChart
         });
         document.body.appendChild(element);
 
-        // Validation that the loadScript and loadStyle promises are each called once.
         expect(loadScript.mock.calls.length).toBe(1);
-        // Validation that the chartjs js and css static resources are each passed as parameters.
         expect(loadScript.mock.calls[0][1]).toEqual(CHARTJS_JS);
     });
 
-    xit('shows the error panel element on static resource load error', async () => {
+    it('shows the error panel element on static resource load error', async () => {
         loadScript.mockRejectedValue(LOAD_SCRIPT_ERROR);
 
-        // Create initial element
-        const element = createElement('c-libs-chartjs', {
+        const element = createElement('c-line-chart', {
             is: LineChart
         });
         document.body.appendChild(element);
 
-        // Wait for any asynchronous DOM updates.
         await flushPromises();
 
         const errorPanelEl = element.shadowRoot.querySelector('c-error-panel');
         return expect(errorPanelEl).not.toBeNull();
     });
 
-    xit('is accessible when library is loaded', async () => {
-        const element = createElement('c-libs-chartjs', {
+    it('is accessible when library is loaded', async () => {
+        const element = createElement('c-line-chart', {
             is: LineChart
         });
 
@@ -80,10 +73,10 @@ describe('c-libs-chartjs', () => {
         await expect(element).toBeAccessible();
     });
 
-    xit('is accessible when there is an error loading library', async () => {
+    it('is accessible when there is an error loading library', async () => {
         loadScript.mockRejectedValue(LOAD_SCRIPT_ERROR);
 
-        const element = createElement('c-libs-chartjs', {
+        const element = createElement('c-line-chart', {
             is: LineChart
         });
 

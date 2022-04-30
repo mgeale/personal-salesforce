@@ -1,0 +1,6 @@
+<template>
+  <div class="chart" lwc:dom="manual"></div>
+  <template if:true={error}>
+    <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+  </template>
+</template>
