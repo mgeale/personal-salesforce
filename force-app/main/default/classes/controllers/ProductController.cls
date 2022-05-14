@@ -23,7 +23,6 @@ public with sharing class ProductController {
         )
       FROM Product2
       WHERE IsActive = TRUE
-      LIMIT 10
     ];
   }
 }
