@@ -7,11 +7,11 @@ const dateFormat = { year: "numeric", month: "long", day: "numeric" };
 
 export default class LineChart extends LightningElement {
   @api productId;
-  _balances;
 
   error;
   chart;
-  chartData;
+  balances;
+
   chartjsInitialized = false;
 
   @wire(getBalances, { productId: "$productId" })
@@ -19,7 +19,7 @@ export default class LineChart extends LightningElement {
     if (error) {
       //TODO:
     } else if (data) {
-      this._balances = data.map((item) => {
+      this.balances = data.map((item) => {
         return {
           date: item.CreatedDate,
           balanceAUD: item.Balance_AUD__c
@@ -28,12 +28,12 @@ export default class LineChart extends LightningElement {
       this.chart.data = {
         datasets: [
           {
-            data: this._balances.map((b) => b.balanceAUD),
+            data: this.balances.map((b) => b.balanceAUD),
             label: "AUD Balance",
             borderColor: "rgb(75, 192, 192)"
           }
         ],
-        labels: this._balances.map((b) =>
+        labels: this.balances.map((b) =>
           new Date(b.date).toLocaleDateString("en-AU", dateFormat)
         )
       };
@@ -65,9 +65,5 @@ export default class LineChart extends LightningElement {
       .catch((error) => {
         this.error = error;
       });
-  }
-
-  get balances() {
-    return this._balances;
   }
 }

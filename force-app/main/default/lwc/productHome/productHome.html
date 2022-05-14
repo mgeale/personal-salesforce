@@ -1,5 +1,5 @@
 <template>
-  <template if:true={products}>
+  <div if:true={products}>
     <lightning-layout multiple-rows="true" horizontal-align="true">
       <template for:each={products} for:item="product">
         <lightning-layout-item
@@ -9,13 +9,18 @@
           size="2"
         >
           <lightning-card>
-            <img class="slds-align_absolute-center" src={product.imageUrl}/>
+            <img class="slds-align_absolute-center" src={product.imageUrl} />
             <div slot="footer">{product.balanceAUD}</div>
             <div class="slds-card__body slds_card__body_inner">
               <lightning-layout class="slds-align_absolute-center">
                 <lightning-layout-item>
                   <div><label>Total: </label>{product.balance}</div>
-                  <div><label>Price: </label>${product.price} <span class={product.priceStyle}>({product.priceChange})</span></div>
+                  <div>
+                    <label>Price: </label>${product.price}
+                    <span class={product.priceStyle}
+                      >({product.priceChange})</span
+                    >
+                  </div>
                 </lightning-layout-item>
               </lightning-layout>
             </div>
@@ -23,5 +28,5 @@
         </lightning-layout-item>
       </template>
     </lightning-layout>
-  </template>
+  </div>
 </template>

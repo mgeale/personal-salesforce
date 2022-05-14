@@ -1,32 +1,22 @@
 import { LightningElement, wire } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
-import { CurrentPageReference } from "lightning/navigation";
-import { subscribe, MessageContext } from 'lightning/messageService';
+import { subscribe, MessageContext } from "lightning/messageService";
 import PRODUCT_ID from "@salesforce/schema/Product2.Id";
 import PRODUCT_NAME from "@salesforce/schema/Product2.Name";
 import PRODUCT_IMAGE from "@salesforce/schema/Product2.DisplayUrl";
-import PRODUCT_SELECTED_CHANNEL from '@salesforce/messageChannel/Product_Selected__c';
-import getTransactionHistory from "@salesforce/apex/AssetController.getTransactionHistory";
+import PRODUCT_SELECTED_CHANNEL from "@salesforce/messageChannel/Product_Selected__c";
 import getTotalAmount from "@salesforce/apex/AssetController.getTotalAmount";
 
 const fields = [PRODUCT_ID, PRODUCT_NAME, PRODUCT_IMAGE];
 
 export default class Product extends LightningElement {
-  subscription = null;
+  recordId;
   error;
   product;
-  recordId;
 
-  _transactionHistory;
   _totalAmount;
-  _transactionColumns = [
-    { label: "Date", fieldName: "date", type: "text" },
-    { label: "Quantity", fieldName: "quantity", type: "text" },
-    { label: "Price Per Unit", fieldName: "price", type: "text" },
-    { label: "Total Cost", fieldName: "totalCost", type: "text" }
-  ];
 
-  @wire(CurrentPageReference) pageRef;
+  subscription = null;
 
   @wire(getRecord, {
     recordId: "$recordId",
@@ -44,28 +34,8 @@ export default class Product extends LightningElement {
     }
   }
 
-  @wire(getTransactionHistory, { productId: "$recordId" })
-  apexTransactionHistory({ error, data }) {
-    if (error) {
-      this.error = error;
-      this._transactionHistory = undefined;
-    } else if (data) {
-      this._transactionHistory = data.map((item) => {
-        return {
-          id: item.Id,
-          date: item.PurchaseDate,
-          quantity: item.Quantity__c,
-          price: item.Price__c,
-          totalCost: item.Total_Cost__c
-        };
-      });
-    } else {
-      this._transactionHistory = undefined;
-    }
-  }
-
   @wire(getTotalAmount, { productId: "$recordId" })
-  apexTotalAmount({ error, data }) {
+  wiredTotalAmount({ error, data }) {
     if (error) {
       this.error = error;
       this._totalAmount = undefined;
@@ -81,9 +51,9 @@ export default class Product extends LightningElement {
 
   subscribeToMessageChannel() {
     this.subscription = subscribe(
-        this.messageContext,
-        PRODUCT_SELECTED_CHANNEL,
-        (message) => this.handleMessage(message)
+      this.messageContext,
+      PRODUCT_SELECTED_CHANNEL,
+      (message) => this.handleMessage(message)
     );
   }
 
@@ -103,14 +73,6 @@ export default class Product extends LightningElement {
 
   get productImage() {
     return getFieldValue(this.product, PRODUCT_IMAGE);
-  }
-
-  get transactionColumns() {
-    return this._transactionColumns;
-  }
-
-  get transactionHistory() {
-    return this._transactionHistory;
   }
 
   get totalAmount() {

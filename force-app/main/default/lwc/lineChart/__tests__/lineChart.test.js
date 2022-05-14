@@ -1,8 +1,42 @@
 import { createElement } from 'lwc';
 import LineChart from 'c/lineChart';
 import { loadScript } from "lightning/platformResourceLoader";
+import getBalances from "@salesforce/apex/BalanceController.getBalanceHistoryForProduct";
 
-// Sample error for loadScript error
+jest.mock(
+    '@salesforce/apex/BalanceController.getBalanceHistoryForProduct',
+    () => {
+        const { createApexTestWireAdapter } = require("@salesforce/sfdx-lwc-jest");
+        return {
+            default: createApexTestWireAdapter(jest.fn())
+        };
+    },
+    { virtual: true }
+);
+
+let mockScriptSuccess;
+
+jest.mock(
+    'lightning/platformResourceLoader',
+    () => {
+        return {
+            loadScript() {
+                return new Promise((resolve, reject) => {
+                    if (!mockScriptSuccess) {
+                        reject(LOAD_SCRIPT_ERROR);
+                    } else {
+                        global.moment = require('./data/chartJs');
+                        resolve();
+                    }
+                });
+            }
+        };
+    },
+    { virtual: true }
+);
+
+const GET_PRODUCTS = require("./data/getProducts.json");
+
 const LOAD_SCRIPT_ERROR = {
     body: { message: 'An internal server error has occurred' },
     ok: false,
@@ -11,17 +45,17 @@ const LOAD_SCRIPT_ERROR = {
 };
 
 describe('c-line-chart', () => {
+    beforeEach(() => {
+        mockScriptSuccess = true
+    });
+
     afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
-        // Clear mocks so that every test run has a clean implementation
         jest.clearAllMocks();
-    });
+    }); 
 
-    // Helper function to wait until the microtask queue is empty. This is needed for promise
-    // timing when the platformResourceLoader promises.
     async function flushPromises() {
         // eslint-disable-next-line @lwc/lwc/no-async-operation
         return new Promise((resolve) => setTimeout(resolve, 0));
@@ -49,8 +83,18 @@ describe('c-line-chart', () => {
         expect(loadScript.mock.calls[0][1]).toEqual(CHARTJS_JS);
     });
 
+    it('loads products', async () => {
+        const element = createElement('c-line-chart', {
+            is: LineChart
+        });
+        document.body.appendChild(element);
+
+        await flushPromises();
+        getBalances.emit(GET_PRODUCTS);
+    });
+
     it('shows the error panel element on static resource load error', async () => {
-        loadScript.mockRejectedValue(LOAD_SCRIPT_ERROR);
+        mockScriptSuccess = false;
 
         const element = createElement('c-line-chart', {
             is: LineChart
@@ -74,7 +118,7 @@ describe('c-line-chart', () => {
     });
 
     it('is accessible when there is an error loading library', async () => {
-        loadScript.mockRejectedValue(LOAD_SCRIPT_ERROR);
+        mockScriptSuccess = false;
 
         const element = createElement('c-line-chart', {
             is: LineChart

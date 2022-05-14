@@ -1,7 +1,7 @@
 import { LightningElement, wire } from "lwc";
 import getProductList from "@salesforce/apex/ProductController.getProductList";
 
-export default class Asset extends LightningElement {
+export default class ProductHome extends LightningElement {
   products = [];
   error;
 
@@ -24,7 +24,14 @@ export default class Asset extends LightningElement {
     if (error) {
       this.error = error;
     } else if (data) {
-      this.products = data.map((item) => {
+      this.products = data.filter((item) => {
+        if (item.Family == 'Web3') {
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .map((item) => {
         const price = item.PricebookEntries
           ? item.PricebookEntries[0].UnitPrice
           : null;
@@ -47,13 +54,13 @@ export default class Asset extends LightningElement {
           code: item.ProductCode,
           price,
           priceChange,
-          priceStyle: priceChange > 0 ? "positive" : "negative",
+          priceStyle: price - pricePrevious > 0 ? "positive" : "negative",
           balance,
           balanceAUD
         };
       });
 
-      this.products.sort((a, b) => a.balanceAUD > b.balanceAUD && -1 || 1);
+      // this.products.sort((a, b) => (a.balanceAUD > b.balanceAUD && -1) || 1);
     }
   }
 }

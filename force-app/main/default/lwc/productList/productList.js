@@ -1,11 +1,10 @@
 import { LightningElement, wire } from "lwc";
 import { CurrentPageReference } from "lightning/navigation";
-import { publish, MessageContext } from 'lightning/messageService';
+import { publish, MessageContext } from "lightning/messageService";
 import getProductList from "@salesforce/apex/ProductController.getProductList";
-import PRODUCT_SELECTED_CHANNEL from '@salesforce/messageChannel/Product_Selected__c';
+import PRODUCT_SELECTED_CHANNEL from "@salesforce/messageChannel/Product_Selected__c";
 
 export default class ProductList extends LightningElement {
-  empMessage;
   error;
   tableData;
   treeData;
