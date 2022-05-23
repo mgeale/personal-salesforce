@@ -1,5 +1,5 @@
 @isTest
-public class CoinGeckoPricesQueueableTest {
+public class CoinGeckoPricesQueueable_Test {
   @isTest
   public static void shouldSavePricesBookEntries() {
     CoinGeckoPricesQueueable.doChainJob = false;

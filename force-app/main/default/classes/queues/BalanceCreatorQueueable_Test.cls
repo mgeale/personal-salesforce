@@ -1,5 +1,5 @@
 @isTest
-public class BalanceCreatorQueueableTest {
+public class BalanceCreatorQueueable_Test {
   @isTest
   public static void shouldCreateBalanceEntries() {
     Product2 prod = (Product2) TestDataFactory.createSObject(
@@ -11,10 +11,7 @@ public class BalanceCreatorQueueableTest {
         'IsActive' => true
       }
     );
-    Account acc = (Account) TestDataFactory.createSObject(
-      'Account',
-      new Map<String, Object>{}
-    );
+    Account acc = (Account) TestDataFactory.createSObject('Account');
 
     Id pricebookId = Test.getStandardPricebookId();
     insert new PricebookEntry(

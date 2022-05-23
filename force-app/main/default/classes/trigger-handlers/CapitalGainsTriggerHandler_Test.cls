@@ -1,14 +1,8 @@
 @isTest
-public class CapitalGainsTriggerHandlerTest {
+public class CapitalGainsTriggerHandler_Test {
   private static Map<String, ID> setup() {
-    Account acc = (Account) TestDataFactory.createSObject(
-      'Account',
-      new Map<String, Object>{}
-    );
-    Product2 prod = (Product2) TestDataFactory.createSObject(
-      'Product2',
-      new Map<String, Object>{}
-    );
+    Account acc = (Account) TestDataFactory.createSObject('Account');
+    Product2 prod = (Product2) TestDataFactory.createSObject('Product2');
     Asset a1 = (Asset) TestDataFactory.createSObject(
       'Asset',
       new Map<String, Object>{

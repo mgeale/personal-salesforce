@@ -4,8 +4,8 @@
  * @group Shared Code
  */
 public enum LogSeverity {
-  DEBUG,
-  INFO,
-  WARN,
-  ERROR
+    DEBUG,
+    INFO,
+    WARN,
+    ERROR
 }

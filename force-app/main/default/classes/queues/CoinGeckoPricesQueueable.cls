@@ -1,11 +1,13 @@
 public with sharing class CoinGeckoPricesQueueable implements Queueable, Database.AllowsCallouts {
   private Id priceBookId;
+  private Log logger;
 
   @testVisible
   private static Boolean doChainJob = true;
 
   public CoinGeckoPricesQueueable(Id priceBookId) {
     this.priceBookId = priceBookId;
+    this.logger = Log.get();
   }
 
   public void execute(QueueableContext ctx) {
@@ -29,6 +31,7 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
       '&vs_currencies=aud'
     );
     if (response.getStatusCode() != 200) {
+      this.logger.publish('Error: ' + response.getBody());
       return;
     }
     CoinGeckoParser parsedResponse = CoinGeckoParser.parse(response.getBody());
@@ -48,25 +51,6 @@ public with sharing class CoinGeckoPricesQueueable implements Queueable, Databas
 
     if (doChainJob) {
       System.enqueueJob(new BalanceCreatorQueueable(this.priceBookId));
-    }
-  }
-
-  private static String sendRequest(List<String> ids) {
-    Http h = new Http();
-    HttpRequest req = new HttpRequest();
-
-    req.setEndpoint(
-      'https://api.coingecko.com/api/v3/simple/price?ids=' +
-      String.join(ids, ',') +
-      '&vs_currencies=aud'
-    );
-    req.setMethod('GET');
-
-    try {
-      HttpResponse res = h.send(req);
-      return res.getBody();
-    } catch (Exception e) {
-      return 'Server error';
     }
   }
 }

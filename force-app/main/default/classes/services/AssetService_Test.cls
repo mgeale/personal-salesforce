@@ -1,5 +1,5 @@
 @isTest
-public class AssetServiceTest {
+public class AssetService_Test {
   @TestSetup
   static void makeData() {
     Product2 p1 = (Product2) TestDataFactory.createSObject(
@@ -10,10 +10,7 @@ public class AssetServiceTest {
       'Product2',
       new Map<String, Object>{ 'Name' => 'Prod2', 'IsActive' => true }
     );
-    Account a = (Account) TestDataFactory.createSObject(
-      'Account',
-      new Map<String, Object>{}
-    );
+    Account a = (Account) TestDataFactory.createSObject('Account');
 
     insert new Asset(
       Quantity__c = 10,
