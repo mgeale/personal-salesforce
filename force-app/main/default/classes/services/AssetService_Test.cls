@@ -101,4 +101,22 @@ public class AssetService_Test {
     System.assertEquals(14, p1);
     System.assertEquals(5, p2);
   }
+
+  @isTest
+  public static void shouldGetTotalAmountsActive() {
+    List<Product2> products = [
+      SELECT id
+      FROM Product2
+      WHERE Name IN ('Prod1', 'Prod2')
+    ];
+
+    Map<String, Decimal> result = AssetService.getTotalAmounts(
+      new List<ID>{ products[0].id, products[1].id },
+      true
+    );
+    Decimal p1 = result.get(products[0].id);
+    Decimal p2 = result.get(products[1].id);
+    System.assertEquals(14, p1);
+    System.assertEquals(5, p2);
+  }
 }

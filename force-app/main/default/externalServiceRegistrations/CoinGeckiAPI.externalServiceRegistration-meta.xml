@@ -1,0 +1,1598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalServiceRegistration xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>CoinGeckiAPI</label>
+    <namedCredential>CoinGecko</namedCredential>
+    <schema>{
+  &quot;swagger&quot;: &quot;2.0&quot;,
+  &quot;info&quot;: {
+    &quot;description&quot;: &quot;&quot; ,
+    &quot;version&quot;: &quot;3.0.0&quot;,
+    &quot;title&quot;: &quot;CoinGecko API V3&quot;
+  },
+  &quot;host&quot;: &quot;api.coingecko.com&quot;,
+  &quot;basePath&quot;: &quot;/api/v3&quot;,
+  &quot;schemes&quot;: [
+    &quot;https&quot;
+  ],
+  &quot;paths&quot;: {
+    &quot;/ping&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;ping&quot;
+        ],
+        &quot;summary&quot;: &quot;Check API server status&quot;,
+        &quot;description&quot;: &quot;Check API server status\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Status OK&quot;
+          }
+        }
+      }
+    },
+    &quot;/simple/price&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;simple&quot;
+        ],
+        &quot;summary&quot;: &quot;Get the current price of any cryptocurrencies in any other supported currencies that you need.&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;ids&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;id of coins, comma-separated if querying more than 1 coin\n*refers to &lt;b&gt;`coins/list`&lt;/b&gt;&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currencies&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;vs_currency of coins, comma-separated if querying more than 1 vs_currency\n*refers to &lt;b&gt;`simple/supported_vs_currencies`&lt;/b&gt;&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_market_cap&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include market_cap, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_24hr_vol&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include 24hr_vol, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_24hr_change&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include 24hr_change, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_last_updated_at&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include last_updated_at of price, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;price(s) of cryptocurrency&quot;
+          }
+        }
+      }
+    },
+    &quot;/simple/token_price/{id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;simple&quot;
+        ],
+        &quot;summary&quot;: &quot;Get current price of tokens (using contract addresses) for a given platform in any other currency that you need.&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;The id of the platform issuing tokens (See asset_platforms endpoint for list of options)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;contract_addresses&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The contract address of tokens, comma separated&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currencies&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;vs_currency of coins, comma-separated if querying more than 1 vs_currency\n*refers to &lt;b&gt;`simple/supported_vs_currencies`&lt;/b&gt;&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_market_cap&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include market_cap, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_24hr_vol&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include 24hr_vol, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_24hr_change&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include 24hr_change, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_last_updated_at&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;&lt;b&gt;true/false&lt;/b&gt; to include last_updated_at of price, &lt;b&gt;default: false&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;price(s) of cryptocurrency&quot;
+          }
+        }
+      }
+    },
+    &quot;/simple/supported_vs_currencies&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;simple&quot;
+        ],
+        &quot;summary&quot;: &quot;Get list of supported_vs_currencies.&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;list of supported_vs_currencies&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/list&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;List all supported coins id, name and symbol (no pagination required)&quot;,
+        &quot;description&quot;: &quot;Use this to obtain all the coins&apos; id in order to make API calls&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot; : [
+          {
+            &quot;name&quot;: &quot;include_platform&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;flag to include platform contract addresses (eg. 0x.... for Ethereum based tokens). \n valid values: true, false&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all coins with id, name, and symbol&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/markets&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;List all supported coins price, market cap, volume, and market related data&quot;,
+        &quot;description&quot;: &quot;Use this to obtain all the coins market data (price, market cap, volume)&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;ids&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;:  &quot;The ids of the coin, comma separated crytocurrency symbols (base). refers to `/coins/list`.\n&lt;b&gt;When left empty, returns numbers the coins observing the params `limit` and `start`&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;:  &quot;filter by coin category. Refer to /coin/categories/list&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;valid values: &lt;b&gt;market_cap_desc, gecko_desc, gecko_asc, market_cap_asc, market_cap_desc, volume_asc, volume_desc, id_asc, id_desc&lt;/b&gt;\nsort results by field.&quot;,
+            &quot;default&quot;: &quot;market_cap_desc&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;valid values: 1..250\n Total results per page&quot;,
+            &quot;default&quot;: 100,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;default&quot;: 1,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;sparkline&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include sparkline 7 days data (eg. true, false)&quot;,
+            &quot;default&quot;: false,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;name&quot;: &quot;price_change_percentage&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include price change percentage in &lt;b&gt;1h, 24h, 7d, 14d, 30d, 200d, 1y&lt;/b&gt; (eg. &apos;`1h,24h,7d`&apos; comma-separated, invalid values will be discarded)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all coins with market data&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get current data (name, price, market, ... including exchange tickers) for a coin&quot;,
+        &quot;description&quot;: &quot;Get current data (name, price, market, ... including exchange tickers) for a coin.&lt;br&gt;&lt;br&gt; **IMPORTANT**:\n Ticker object is limited to 100 items, to get more tickers, use `/coins/{id}/tickers`\n Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.\n Ticker `is_anomaly` is true if ticker&apos;s price is outliered by our system.\n You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;localization&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include all localized languages in response (true/false) &lt;b&gt;[default: true]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;tickers&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include tickers data (true/false) &lt;b&gt;[default: true]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;name&quot;: &quot;market_data&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include market_data (true/false) &lt;b&gt;[default: true]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;name&quot;: &quot;community_data&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include community_data data (true/false) &lt;b&gt;[default: true]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;name&quot;: &quot;developer_data&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include developer_data data (true/false) &lt;b&gt;[default: true]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          },
+          {
+            &quot;name&quot;: &quot;sparkline&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Include sparkline 7 days data (eg. true, false) &lt;b&gt;[default: false]&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;boolean&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get current data for a coin&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/tickers&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get coin tickers (paginated to 100 items)&quot;,
+        &quot;description&quot;: &quot;Get coin tickers (paginated to 100 items)&lt;br&gt;&lt;br&gt; **IMPORTANT**:\n Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.\n Ticker `is_anomaly` is true if ticker&apos;s price is outliered by our system.\n You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins/list) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;exchange_ids&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;filter results by exchange_ids (ref: v3/exchanges/list)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_exchange_logo&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;flag to show exchange_logo&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;valid values: &lt;b&gt;trust_score_desc (default), trust_score_asc and volume_desc&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;depth&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;flag to show 2% orderbook depth. valid values: true, false&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get coin tickers&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/history&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get historical data (name, price, market, stats) at a given date for a coin&quot;,
+        &quot;description&quot;: &quot;Get historical data (name, price, market, stats) at a given date for a coin\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;date&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The date of data snapshot in dd-mm-yyyy eg. 30-12-2017&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;localization&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Set to false to exclude localized languages in response&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get historical data at a given date for a coin&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/market_chart&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get historical market data include price, market cap, and 24h volume (granularity auto)&quot;,
+        &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume (granularity auto)\n &lt;b&gt;Minutely data will be used for duration within 1 day, Hourly data will be used for duration between 1 day and 90 days, Daily data will be used for duration above 90 days.&lt;/b&gt;&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;days&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Data up to number of days ago (eg. 1,14,30,max)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;interval&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Data interval. Possible value: daily&quot;,
+            &quot;required&quot;:false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/market_chart/range&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)&quot;,
+        &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)\n &lt;b&gt;&lt;ul&gt;&lt;li&gt;Data granularity is automatic (cannot be adjusted)&lt;/li&gt;&lt;li&gt;1 day from query time = 5 minute interval data&lt;/li&gt;&lt;li&gt;1 - 90 days from query time = hourly data&lt;/li&gt;&lt;li&gt;above 90 days from query time = daily data (00:00 UTC)&lt;/li&gt;&lt;/ul&gt; &lt;/b&gt;&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;from&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;From date in UNIX Timestamp (eg. 1392577232)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;to&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;To date in UNIX Timestamp (eg. 1422577232)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/status_updates&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get status updates for a given coin&quot;,
+        &quot;description&quot;: &quot;Get status updates for a given coin&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get paginated status updates for a given coin&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/contract/{contract_address}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;contract&quot;
+        ],
+        &quot;summary&quot;: &quot;Get coin info from contract address&quot;,
+        &quot;description&quot;: &quot;Get coin info from contract address&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;Asset platform (See asset_platforms endpoint for list of options)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;contract_address&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;Token&apos;s contract address&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get current data for a coin&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/contract/{contract_address}/market_chart/&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;contract&quot;
+        ],
+        &quot;summary&quot;: &quot;Get historical market data include price, market cap, and 24h volume (granularity auto) from a contract address &quot;,
+        &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume (granularity auto)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;The id of the platform issuing tokens (See asset_platforms endpoint for list of options)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;contract_address&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;Token&apos;s contract address&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;days&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Data up to number of days ago (eg. 1,14,30,max)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/contract/{contract_address}/market_chart/range&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;contract&quot;
+        ],
+        &quot;summary&quot;: &quot;Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto) from a contract address&quot;,
+        &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume within a range of timestamp (granularity auto)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;The id of the platform issuing tokens (See asset_platforms endpoint for list of options)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;contract_address&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;Token&apos;s contract address&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;from&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;From date in UNIX Timestamp (eg. 1392577232)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;to&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;To date in UNIX Timestamp (eg. 1422577232)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get historical market data include price, market cap, and 24h volume&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/{id}/ohlc&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;coins&quot;
+        ],
+        &quot;summary&quot;: &quot;Get coin&apos;s OHLC&quot;,
+        &quot;description&quot;: &quot;Candle&apos;s body:\n\n1 - 2 days: 30 minutes\n3 - 30 days: 4 hours\n31 and before: 4 days&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the coin id (can be obtained from /coins/list) eg. bitcoin&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;vs_currency&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;The target currency of market data (usd, eur, jpy, etc.)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;days&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot; Data up to number of days ago (1/7/14/30/90/180/365/max)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;successful operation\n\n[\n1594382400000 (time),\n1.1 (open),\n 2.2 (high),\n 3.3 (low),\n 4.4 (close)\n]&quot;,
+            &quot;schema&quot;: {
+              &quot;type&quot;: &quot;array&quot;,
+              &quot;items&quot;: {
+                &quot;type&quot;: &quot;number&quot;,
+                &quot;example&quot;: [
+                  1594382400000,
+                  1.1,
+                  2.2,
+                  3.3,
+                  4.4
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    &quot;/asset_platforms&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;asset_platforms&quot;
+        ],
+        &quot;summary&quot;: &quot;List all asset platforms (Blockchain networks)&quot;,
+        &quot;description&quot;: &quot;List all asset platforms&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all asset_platforms&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/categories/list&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;categories&quot;
+        ],
+        &quot;summary&quot;: &quot;List all categories&quot;,
+        &quot;description&quot;: &quot;List all categories&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all categories&quot;
+          }
+        }
+      }
+    },
+    &quot;/coins/categories&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;categories&quot;
+        ],
+        &quot;summary&quot;: &quot;List all categories with market data&quot;,
+        &quot;description&quot;: &quot;List all categories with market data&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;valid values: &lt;b&gt;market_cap_desc (default), market_cap_asc, name_desc, name_asc, market_cap_change_24h_desc and market_cap_change_24h_asc&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all categories with market data&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;List all exchanges&quot;,
+        &quot;description&quot;: &quot;List all exchanges&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Valid values: 1...250\nTotal results per page\nDefault value:: 100&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all exchanges&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges/list&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;List all supported markets id and name (no pagination required)&quot;,
+        &quot;description&quot;: &quot;Use this to obtain all the markets&apos; id in order to make API calls&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all coins with id and name&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges/{id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;Get exchange volume in BTC and top 100 tickers only&quot;,
+        &quot;description&quot;: &quot;Get exchange volume in BTC and tickers&lt;br&gt;&lt;br&gt; **IMPORTANT**:\n Ticker object is limited to 100 items, to get more tickers, use `/exchanges/{id}/tickers`\n Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.\n Ticker `is_anomaly` is true if ticker&apos;s price is outliered by our system.\n You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the exchange id (can be obtained from /exchanges/list) eg. binance&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get exchange volume in BTC and top 100 tickers&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges/{id}/tickers&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;Get exchange tickers (paginated, 100 tickers per page)&quot;,
+        &quot;description&quot;: &quot;Get exchange tickers (paginated)&lt;br&gt;&lt;br&gt; **IMPORTANT**:\n Ticker `is_stale` is true when ticker that has not been updated/unchanged from the exchange for a while.\n Ticker `is_anomaly` is true if ticker&apos;s price is outliered by our system.\n You are responsible for managing how you want to display these information (e.g. footnote, different background, change opacity, hide)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the exchange id (can be obtained from /exchanges/list) eg. binance&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;coin_ids&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;filter tickers by coin_ids (ref: v3/coins/list)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_exchange_logo&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;flag to show exchange_logo&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+
+            &quot;name&quot;: &quot;depth&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;flag to show 2% orderbook depth i.e., cost_to_move_up_usd and cost_to_move_down_usd&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;valid values: &lt;b&gt;trust_score_desc (default), trust_score_asc and volume_desc&lt;/b&gt;&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get exchange tickers&quot;
+          }
+        }
+      }
+    },
+    &quot;/finance_platforms&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;finance&quot;
+        ],
+        &quot;summary&quot;: &quot;List all finance platforms&quot;,
+        &quot;description&quot;: &quot;List all finance platforms&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;page of results (paginated to 100 by default)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all finance platforms&quot;
+          }
+        }
+      }
+    },
+    &quot;/finance_products&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;finance&quot;
+        ],
+        &quot;summary&quot;: &quot;List all finance products&quot;,
+        &quot;description&quot;: &quot;List all finance products&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;page of results (paginated to 100 by default)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;start_at&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;start date of the financial products&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;end_at&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;end date of the financial products&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all finance products&quot;
+          }
+        }
+      }
+    },
+    &quot;/indexes&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;indexes&quot;
+        ],
+        &quot;summary&quot;: &quot;List all market indexes&quot;,
+        &quot;description&quot;: &quot;List all market indexes&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all market indexes&quot;
+          }
+        }
+      }
+    },
+    &quot;/indexes/{market_id}/{id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;indexes&quot;
+        ],
+        &quot;summary&quot;: &quot;get market index by market id and index id&quot;,
+        &quot;description&quot;: &quot;get market index by market id and index id&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;market_id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the market id (can be obtained from /exchanges/list)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the index id (can be obtained from /indexes/list)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;get market index by market id and index id&quot;
+          }
+        }
+      }
+    },
+    &quot;/indexes/list&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;indexes&quot;
+        ],
+        &quot;summary&quot;: &quot;list market indexes id and name&quot;,
+        &quot;description&quot;: &quot;list market indexes id and name&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;list market indexes id and name&quot;
+          }
+        }
+      }
+    },
+    &quot;/derivatives&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;derivatives&quot;
+        ],
+        &quot;summary&quot;: &quot;List all derivative tickers&quot;,
+        &quot;description&quot;: &quot;List all derivative tickers&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;include_tickers&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;[&apos;all&apos;, &apos;unexpired&apos;] - expired to show unexpired tickers, all to list all tickers, defaults to unexpired&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all derivative tickers&quot;
+          }
+        }
+      }
+    },
+    &quot;/derivatives/exchanges&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;derivatives&quot;
+        ],
+        &quot;summary&quot;: &quot;List all derivative exchanges&quot;,
+        &quot;description&quot;: &quot;List all derivative exchanges&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;order&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;order results using following params name_asc，name_desc，open_interest_btc_asc，open_interest_btc_desc，trade_volume_24h_btc_asc，trade_volume_24h_btc_desc&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all derivative exchanges&quot;
+          }
+        }
+      }
+    },
+    &quot;/derivatives/exchanges/{id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;derivatives&quot;
+        ],
+        &quot;summary&quot;: &quot;show derivative exchange data&quot;,
+        &quot;description&quot;: &quot;show derivative exchange data&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the exchange id (can be obtained from derivatives/exchanges/list) eg. bitmex&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;include_tickers&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;[&apos;all&apos;, &apos;unexpired&apos;] - expired to show unexpired tickers, all to list all tickers, leave blank to omit tickers data in response&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;show derivative exchange data&quot;
+          }
+        }
+      }
+    },
+    &quot;/derivatives/exchanges/list&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;derivatives&quot;
+        ],
+        &quot;summary&quot;: &quot;List all derivative exchanges name and identifier&quot;,
+        &quot;description&quot;: &quot;List all derivative exchanges name and identifier&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all derivative exchanges name and identifier&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges/{id}/status_updates&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;Get status updates for a given exchange&quot;,
+        &quot;description&quot;: &quot;Get status updates for a given exchange&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the exchange id (can be obtained from /exchanges/list) eg. binance&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get paginated status updates for a given coin&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchanges/{id}/volume_chart&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchanges&quot;
+        ],
+        &quot;summary&quot;: &quot;Get volume_chart data for a given exchange&quot;,
+        &quot;description&quot;: &quot;Get volume_chart data for a given exchange&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;pass the exchange id (can be obtained from /exchanges/list) eg. binance&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;days&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot; Data up to number of days ago (eg. 1,14,30)&quot;,
+            &quot;required&quot;: true,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get exchange volume_chart data&quot;
+          }
+        }
+      }
+    },
+    &quot;/status_updates&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;status_updates&quot;
+        ],
+        &quot;summary&quot;: &quot;List all status_updates with data (description, category, created_at, user, user_title and pin)&quot;,
+        &quot;description&quot;: &quot;List all status_updates with data (description, category, created_at, user, user_title and pin)\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;category&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Filtered by category (eg. general, milestone, partnership, exchange_listing, software_release, fund_movement, new_listings, event)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;project_type&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Filtered by Project Type (eg. coin, market). If left empty returns both status from coins and markets.&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;per_page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Total results per page&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;Page through results&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;integer&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List all status_updates with data&quot;
+          }
+        }
+      }
+    },
+    &quot;/events&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;events&quot;
+        ],
+        &quot;summary&quot;: &quot;Get events, paginated by 100&quot;,
+        &quot;description&quot;: &quot;Get events, paginated by 100\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;country_code&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;country_code of event (eg. &apos;US&apos;). use &lt;b&gt;/api/v3/events/countries&lt;/b&gt; for list of country_codes&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;type&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;type of event (eg. &apos;Conference&apos;). use &lt;b&gt;/api/v3/events/types&lt;/b&gt; for list of types&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;page&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;page of results (paginated by 100)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;upcoming_events_only&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;lists only upcoming events. &lt;br&gt;true, false&lt;/br&gt; (defaults to true, set to false to list all events)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;from_date&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;lists events after this date yyyy-mm-dd&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          },
+          {
+            &quot;name&quot;: &quot;to_date&quot;,
+            &quot;in&quot;: &quot;query&quot;,
+            &quot;description&quot;: &quot;lists events before this date yyyy-mm-dd (set upcoming_events_only to false if fetching past events)&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List events&quot;
+          }
+        }
+      }
+    },
+    &quot;/events/countries&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;events&quot;
+        ],
+        &quot;summary&quot;: &quot;Get list of event countries&quot;,
+        &quot;description&quot;: &quot;Get list of event countries\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List event countries&quot;
+          }
+        }
+      }
+    },
+    &quot;/events/types&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;events&quot;
+        ],
+        &quot;summary&quot;: &quot;Get list of events types&quot;,
+        &quot;description&quot;: &quot;Get list of event types\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List event types&quot;
+          }
+        }
+      }
+    },
+    &quot;/exchange_rates&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;exchange_rates&quot;
+        ],
+        &quot;summary&quot;: &quot;Get BTC-to-Currency exchange rates&quot;,
+        &quot;description&quot;: &quot;Get BTC-to-Currency exchange rates\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List rates&quot;
+          }
+        }
+      }
+    },
+    &quot;/search/trending&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;trending&quot;
+        ],
+        &quot;summary&quot;: &quot;Get trending search coins (Top-7) on CoinGecko in the last 24 hours&quot;,
+        &quot;description&quot;: &quot;Top-7 trending coins on CoinGecko as searched by users in the last 24 hours (Ordered by most popular first)&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;List trending coins by most popular first&quot;
+          }
+        }
+      }
+    },
+    &quot;/global&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;global&quot;
+        ],
+        &quot;summary&quot;: &quot;Get cryptocurrency global data&quot;,
+        &quot;description&quot;: &quot;Get cryptocurrency global data\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get global data - total_volume, total_market_cap, ongoing icos etc&quot;
+          }
+        }
+      }
+    },
+    &quot;/global/decentralized_finance_defi&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;global&quot;
+        ],
+        &quot;summary&quot;: &quot;Get cryptocurrency global decentralized finance(defi) data&quot;,
+        &quot;description&quot;: &quot;Get Top 100 Cryptocurrency Global Eecentralized Finance(defi) data\n&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [],
+        &quot;responses&quot;: {
+          &quot;defi_market_cap&quot;: {
+            &quot;description&quot;: &quot;Defi Market Capitalization in USD&quot;
+          },
+          &quot;eth_market_cap&quot;: {
+            &quot;description&quot;: &quot;Ethereum Market Capitalization in USD&quot;
+          },
+          &quot;defi_to_eth_ratio&quot;: {
+            &quot;description&quot;: &quot;defi_market_cap to eth_market_cap ratio&quot;
+          },
+          &quot;trading_volume_24h&quot;: {
+            &quot;description&quot;: &quot;defi trading volume in 24h in USD&quot;
+          },
+          &quot;defi_dominance&quot;: {
+            &quot;description&quot;: &quot;defi_market_cap to total_market_cap ratio&quot;
+          },
+          &quot;top_coin_name&quot;: {
+            &quot;description&quot;: &quot;defi coin with largest market_cap&quot;
+          },
+          &quot;top_coin_dominance&quot;: {
+            &quot;description&quot;: &quot;top defi coin market dominance&quot;
+          }
+        }
+      }
+    },
+    &quot;/companies/public_treasury/{coin_id}&quot;: {
+      &quot;get&quot;: {
+        &quot;tags&quot;: [
+          &quot;companies (beta)&quot;
+        ],
+        &quot;summary&quot;: &quot;Get public companies data&quot;,
+        &quot;description&quot;: &quot;Get public companies bitcoin or ethereum holdings (Ordered by total holdings descending)&quot;,
+        &quot;produces&quot;: [
+          &quot;application/json&quot;
+        ],
+        &quot;parameters&quot;: [
+          {
+            &quot;name&quot;: &quot;coin_id&quot;,
+            &quot;in&quot;: &quot;path&quot;,
+            &quot;description&quot;: &quot;bitcoin or ethereum&quot;,
+            &quot;required&quot;: false,
+            &quot;type&quot;: &quot;string&quot;
+          }
+        ],
+        &quot;responses&quot;: {
+          &quot;200&quot;: {
+            &quot;description&quot;: &quot;Get public companies bitcoin or ethereum holdings&quot;
+          }
+        }
+      }
+    }
+  },
+  &quot;definitions&quot;: {}
+}
+</schema>
+    <schemaType>OpenApi</schemaType>
+    <schemaUrl>/api/documentations/v3/swagger.json</schemaUrl>
+    <status>Complete</status>
+</ExternalServiceRegistration>

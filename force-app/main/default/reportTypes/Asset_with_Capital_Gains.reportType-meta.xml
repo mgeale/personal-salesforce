@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
     <baseObject>Asset</baseObject>
     <category>products</category>
@@ -230,6 +230,11 @@
             <field>UsageEndDate</field>
             <table>Asset</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Quantity_Real_Number__c</field>
+            <table>Asset</table>
+        </columns>
         <masterLabel>Assets</masterLabel>
     </sections>
     <sections>
@@ -299,5 +304,13 @@
             <table>Asset.Capital_Gains_Sold__r</table>
         </columns>
         <masterLabel>Sold</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Tax_Discount__c</field>
+            <table>Asset.Capital_Gains_Sold__r</table>
+        </columns>
+        <masterLabel>Capital Gains</masterLabel>
     </sections>
 </ReportType>

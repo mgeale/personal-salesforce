@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <brand>
         <headerColor>#0070D2</headerColor>
@@ -10,13 +10,14 @@
     <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Portfolio</label>
     <navType>Standard</navType>
+    <tabs>Portfolio_Home</tabs>
+    <tabs>Products</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Asset</tabs>
     <tabs>standard-Product2</tabs>
     <tabs>standard-Pricebook2</tabs>
-    <tabs>standard-Opportunity</tabs>
-    <tabs>standard-report</tabs>
-    <tabs>standard-Dashboard</tabs>
+    <tabs>Balance__c</tabs>
+    <tabs>Capital_Gains__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Portfolio_UtilityBar</utilityBar>
 </CustomApplication>

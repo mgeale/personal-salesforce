@@ -8,7 +8,7 @@ public with sharing class AssetService {
     AggregateResult[] groupedResults = [
       SELECT SUM(Quantity__c) Amount, Status, Product2Id
       FROM Asset
-      WHERE Product2Id IN :productIds AND Product2.IsActive = true
+      WHERE Product2Id IN :productIds AND Product2.IsActive = TRUE
       GROUP BY Status, Product2Id
     ];
 
@@ -23,6 +23,23 @@ public with sharing class AssetService {
         ? tally + (Decimal) aggregate.get('Amount')
         : tally - (Decimal) aggregate.get('Amount');
       totalAmounts.put(productId, tally);
+    }
+    return totalAmounts;
+  }
+
+  public static Map<String, Decimal> getTotalAmounts(List<ID> productIds, Boolean isActive) {
+    AggregateResult[] groupedResults = [
+      SELECT Product2Id, SUM(Quantity_Real_Number__c) Amount
+      FROM Asset
+      WHERE Product2Id IN :productIds AND Product2.IsActive = :isActive
+      GROUP BY Product2Id HAVING SUM(Quantity_Real_Number__c) > 0.0000
+    ];
+    Map<String, Decimal> totalAmounts = new Map<String, Decimal>();
+    for (AggregateResult aggregate : groupedResults) {
+      totalAmounts.put(
+        (String) aggregate.get('Product2Id'),
+        (Decimal) aggregate.get('Amount')
+      );
     }
     return totalAmounts;
   }

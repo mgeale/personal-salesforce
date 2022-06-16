@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
     <baseObject>Capital_Gains__c</baseObject>
     <category>products</category>
@@ -67,5 +67,13 @@
             <table>Capital_Gains__c</table>
         </columns>
         <masterLabel>Capital Gains Tax</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Tax_Discount__c</field>
+            <table>Capital_Gains__c</table>
+        </columns>
+        <masterLabel>Capital Gains</masterLabel>
     </sections>
 </ReportType>
