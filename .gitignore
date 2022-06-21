@@ -5,6 +5,7 @@
 # Salesforce cache
 .sfdx/
 .localdevserver/
+.sf/
 
 # LWC VSCode autocomplete
 **/lwc/jsconfig.json
@@ -34,4 +35,4 @@ ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 
-backups
+backups/
