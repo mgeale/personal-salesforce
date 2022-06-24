@@ -1,53 +1,53 @@
 {
-    "packageDirectories": [
+  "packageDirectories": [
+    {
+      "path": "core-app",
+      "default": true,
+      "package": "Core App",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT"
+    },
+    {
+      "path": "portfolio-app",
+      "default": false,
+      "package": "Portfolio App",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "dependencies": [
         {
-            "path": "core-app",
-            "default": true,
-            "package": "Core App",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT"
-        },
-        {
-            "path": "portfolio-app",
-            "default": false,
-            "package": "Portfolio App",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
-            "dependencies": [
-                {
-                    "package": "Core App@0.1.0-1"
-                }
-            ]
-        },
-        {
-            "path": "mortgage-app",
-            "default": false,
-            "package": "Mortgage App",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
-            "dependencies": [
-                {
-                    "package": "Core App@0.1.0-1"
-                }
-            ]
+          "package": "Core App@0.1.0-1"
         }
-    ],
-    "namespace": "",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "53.0",
-    "packageAliases": {
-        "Core App": "0Ho2w00000000UMCAY",
-        "Core App@0.1.0-1": "04t2w000009MjGPAA0",
-        "Portfolio App": "0Ho2w00000000URCAY",
-        "Portfolio App@0.1.0-1": "04t2w000009MjGUAA0",
-        "Portfolio App@0.1.0-2": "04t2w000009MjGZAA0",
-        "Portfolio App@0.1.0-3": "04t2w000009MjGeAAK",
-        "Portfolio App@0.1.0-4": "04t2w000009MjGjAAK",
-        "Portfolio App@0.1.0-5": "04t2w000009MjGoAAK",
-        "Portfolio App@0.1.0-6": "04t2w000009MjGtAAK",
-        "Portfolio App@0.1.0-7": "04t2w000009MjH3AAK",
-        "Portfolio App@0.1.0-8": "04t2w000009MjHDAA0",
-        "Mortgage App": "0Ho2w00000000UbCAI",
-        "Mortgage App@0.1.0-1": "04t2w000009MjHIAA0"
+      ]
+    },
+    {
+      "path": "mortgage-app",
+      "default": false,
+      "package": "Mortgage App",
+      "versionName": "ver 0.1",
+      "versionNumber": "0.1.0.NEXT",
+      "dependencies": [
+        {
+          "package": "Core App@0.1.0-1"
+        }
+      ]
     }
+  ],
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "53.0",
+  "packageAliases": {
+    "Core App": "0Ho2w00000000UMCAY",
+    "Core App@0.1.0-1": "04t2w000009MjGPAA0",
+    "Portfolio App": "0Ho2w00000000URCAY",
+    "Portfolio App@0.1.0-1": "04t2w000009MjGUAA0",
+    "Portfolio App@0.1.0-2": "04t2w000009MjGZAA0",
+    "Portfolio App@0.1.0-3": "04t2w000009MjGeAAK",
+    "Portfolio App@0.1.0-4": "04t2w000009MjGjAAK",
+    "Portfolio App@0.1.0-5": "04t2w000009MjGoAAK",
+    "Portfolio App@0.1.0-6": "04t2w000009MjGtAAK",
+    "Portfolio App@0.1.0-7": "04t2w000009MjH3AAK",
+    "Portfolio App@0.1.0-8": "04t2w000009MjHDAA0",
+    "Mortgage App": "0Ho2w00000000UbCAI",
+    "Mortgage App@0.1.0-1": "04t2w000009MjHIAA0"
+  }
 }
