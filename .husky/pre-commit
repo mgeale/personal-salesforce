@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-#sfdx scanner:run -t . -s 1
-#npm test
+npm run precommit
