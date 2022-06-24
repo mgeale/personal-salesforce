@@ -27,12 +27,16 @@ public with sharing class AssetService {
     return totalAmounts;
   }
 
-  public static Map<String, Decimal> getTotalAmounts(List<ID> productIds, Boolean isActive) {
+  public static Map<String, Decimal> getTotalAmounts(
+    List<ID> productIds,
+    Boolean isActive
+  ) {
     AggregateResult[] groupedResults = [
       SELECT Product2Id, SUM(Quantity_Real_Number__c) Amount
       FROM Asset
       WHERE Product2Id IN :productIds AND Product2.IsActive = :isActive
-      GROUP BY Product2Id HAVING SUM(Quantity_Real_Number__c) > 0.0000
+      GROUP BY Product2Id
+      HAVING SUM(Quantity_Real_Number__c) > 0.0000
     ];
     Map<String, Decimal> totalAmounts = new Map<String, Decimal>();
     for (AggregateResult aggregate : groupedResults) {
