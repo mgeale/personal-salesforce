@@ -45,10 +45,10 @@ export default class LineChart extends LightningElement {
 
   renderedCallback() {
     if (this.chartjsInitialized) {
-        return;
+      return;
     }
     this.chartjsInitialized = true;
-    
+
     loadScript(this, chartjs)
       .then(() => {
         const canvas = document.createElement("canvas");
