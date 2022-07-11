@@ -186,10 +186,10 @@
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
-            <field>Active__c</field>
-            <operator>EqualTo</operator>
+            <field>Start_Date__c</field>
+            <operator>LessThanOrEqualTo</operator>
             <value>
-                <booleanValue>true</booleanValue>
+                <elementReference>NextDate</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
