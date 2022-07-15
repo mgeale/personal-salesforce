@@ -53,18 +53,6 @@ jobs:
             - name: 'Push source to scratch org'
               run: sfdx force:source:push
 
-            # Assign permissionset
-            - name: 'Assign permissionset to default user'
-              run: |
-                  sfdx force:user:permset:assign -n EasySpacesObjects
-                  sfdx force:user:permset:assign -n SpaceManagementApp
-
-            # Import sample data
-            - name: 'Import sample data'
-              run: |
-                  sfdx force:data:tree:import --plan ./data/Plan1.json
-                  sfdx force:data:tree:import --plan ./data/Plan2.json
-
             # Run Apex tests in scratch org
             - name: 'Run Apex tests'
               run: sfdx force:apex:test:run -c -r human -d ./tests/apex -w 20
