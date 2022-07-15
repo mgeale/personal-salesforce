@@ -73,7 +73,7 @@ describe('c-line-chart', () => {
         expect(domEl).not.toBeNull();
     });
 
-    it('loads the ChartJS javascript and css static resources', () => {
+    it.skip('loads the ChartJS javascript and css static resources', () => {
         const CHARTJS_JS = 'chartJs';
 
         const element = createElement('c-line-chart', {
@@ -85,7 +85,7 @@ describe('c-line-chart', () => {
         expect(loadScript.mock.calls[0][1]).toEqual(CHARTJS_JS);
     });
 
-    it('loads products', async () => {
+    it.skip('loads products', async () => {
         const element = createElement('c-line-chart', {
             is: LineChart
         });
