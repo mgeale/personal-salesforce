@@ -131,15 +131,15 @@ jobs:
                   changedPackages=()
 
                   if [ $(echo "$changedPaths" | grep -c '^core-app$') == 1 ]; then
-                      changedPackages+=( 'ESObjects' )
+                      changedPackages+=( 'Core-App' )
                   fi
 
                   if [ $(echo "$changedPaths" | grep -c '^portfolio-app$') == 1 ]; then
-                      changedPackages+=( 'ESBaseStylesLWC' )
+                      changedPackages+=( 'Portfolio-App' )
                   fi
 
                   if [ $(echo "$changedPaths" | grep -c '^mortgage-app$') == 1 ]; then
-                      changedPackages+=( 'ESBaseCodeLWC' )
+                      changedPackages+=( 'Mortgage-App' )
                   fi
 
                   echo "Changed packages (${#changedPackages[@]}):"
