@@ -6,10 +6,6 @@ on:
     workflow_dispatch:
     pull_request:
         types: [opened, edited, synchronize, reopened]
-        branches:
-            - prerelease/spring[2-9][0-9]
-            - prerelease/summer[2-9][0-9]
-            - prerelease/winter[2-9][0-9]
 
 # Jobs to be executed
 jobs:
@@ -60,12 +56,6 @@ jobs:
             # Delete temporary test file that Codecov is unable to parse
             - name: 'Delete coverage file (temporary step)'
               run: rm ./tests/apex/test-result-707*-codecoverage.json
-
-            # Upload code coverage data
-            - name: 'Upload code coverage for Apex to Codecov.io'
-              uses: codecov/codecov-action@v2.0.2
-              with:
-                  flags: Apex
 
             # Housekeeping
             - name: 'Delete scratch org'
