@@ -13,3 +13,9 @@
 **/aura/**/*.tokens
 **/aura/**/*.xml
 .sfdx
+
+core-app/main/default/aura/di_injector
+core-app/main/default/aura/di_injectorAttribute
+core-app/main/default/aura/di_injectorAttributeChangeEvent
+core-app/main/default/aura/di_injectorFlowProxy
+core-app/main/default/aura/di_injectorFlowProxyStatusChanged

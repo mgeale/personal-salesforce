@@ -201,33 +201,33 @@
     <externalSharingModel>ControlledByParent</externalSharingModel>
     <searchLayouts>
         <customTabListAdditionalFields
-    >ORDERS.ORDER_NUMBER</customTabListAdditionalFields>
+        >ORDERS.ORDER_NUMBER</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >SALES.ACCOUNT.NAME</customTabListAdditionalFields>
+        >SALES.ACCOUNT.NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >ORDERS.STATUS</customTabListAdditionalFields>
+        >ORDERS.STATUS</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >ORDERS.TOTAL_AMOUNT</customTabListAdditionalFields>
+        >ORDERS.TOTAL_AMOUNT</customTabListAdditionalFields>
         <lookupDialogsAdditionalFields
-    >ORDERS.ORDER_NUMBER</lookupDialogsAdditionalFields>
+        >ORDERS.ORDER_NUMBER</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields
-    >CONTRACT.OWNERALIAS</lookupDialogsAdditionalFields>
+        >CONTRACT.OWNERALIAS</lookupDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >ORDERS.ORDER_NUMBER</lookupPhoneDialogsAdditionalFields>
+        >ORDERS.ORDER_NUMBER</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >CONTRACT.OWNERALIAS</lookupPhoneDialogsAdditionalFields>
+        >CONTRACT.OWNERALIAS</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields
-    >ORDERS.ORDER_NUMBER</searchResultsAdditionalFields>
+        >ORDERS.ORDER_NUMBER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >SALES.ACCOUNT.NAME</searchResultsAdditionalFields>
+        >SALES.ACCOUNT.NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >ORDERS.TOTAL_AMOUNT</searchResultsAdditionalFields>
+        >ORDERS.TOTAL_AMOUNT</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >ORDERS.EFFECTIVE_DATE</searchResultsAdditionalFields>
+        >ORDERS.EFFECTIVE_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >ORDERS.STATUS</searchResultsAdditionalFields>
+        >ORDERS.STATUS</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
+        >CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

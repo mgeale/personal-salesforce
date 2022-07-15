@@ -6,4 +6,26 @@
         <target>lightning__HomePage</target>
         <target>lightning__AppPage</target>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage">
+            <event
+                name="productselected"
+                label="Product Selected"
+                description="Fire on select ...."
+            >
+                <schema>
+                    {
+                        "type": "object",
+                        "properties": {
+                            "recordId": {
+                                "type": "string",
+                                "title": "Record ID",
+                                "description": "The 18-digit ID of a Product record."
+                            }
+                        }
+                    }
+                </schema>
+            </event>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

@@ -131,37 +131,37 @@
     <externalSharingModel>ReadSelect</externalSharingModel>
     <searchLayouts>
         <customTabListAdditionalFields
-    >PRICEBOOK2.NAME</customTabListAdditionalFields>
+        >PRICEBOOK2.NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >PRICEBOOK2.DESCRIPTION</customTabListAdditionalFields>
+        >PRICEBOOK2.DESCRIPTION</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >PRICEBOOK2.LAST_UPDATE</customTabListAdditionalFields>
+        >PRICEBOOK2.LAST_UPDATE</customTabListAdditionalFields>
         <customTabListAdditionalFields
-    >PRICEBOOK2.IS_ACTIVE</customTabListAdditionalFields>
+        >PRICEBOOK2.IS_ACTIVE</customTabListAdditionalFields>
         <lookupDialogsAdditionalFields
-    >PRICEBOOK2.NAME</lookupDialogsAdditionalFields>
+        >PRICEBOOK2.NAME</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields
-    >PRICEBOOK2.DESCRIPTION</lookupDialogsAdditionalFields>
+        >PRICEBOOK2.DESCRIPTION</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields
-    >PRICEBOOK2.LAST_UPDATE</lookupDialogsAdditionalFields>
+        >PRICEBOOK2.LAST_UPDATE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields
-    >PRICEBOOK2.IS_ACTIVE</lookupDialogsAdditionalFields>
+        >PRICEBOOK2.IS_ACTIVE</lookupDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >PRICEBOOK2.NAME</lookupPhoneDialogsAdditionalFields>
+        >PRICEBOOK2.NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >PRICEBOOK2.DESCRIPTION</lookupPhoneDialogsAdditionalFields>
+        >PRICEBOOK2.DESCRIPTION</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >PRICEBOOK2.LAST_UPDATE</lookupPhoneDialogsAdditionalFields>
+        >PRICEBOOK2.LAST_UPDATE</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields
-    >PRICEBOOK2.IS_ACTIVE</lookupPhoneDialogsAdditionalFields>
+        >PRICEBOOK2.IS_ACTIVE</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRICEBOOK2.NAME</searchResultsAdditionalFields>
+        >PRICEBOOK2.NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRICEBOOK2.DESCRIPTION</searchResultsAdditionalFields>
+        >PRICEBOOK2.DESCRIPTION</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRICEBOOK2.LAST_UPDATE</searchResultsAdditionalFields>
+        >PRICEBOOK2.LAST_UPDATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRICEBOOK2.IS_ACTIVE</searchResultsAdditionalFields>
+        >PRICEBOOK2.IS_ACTIVE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadSelect</sharingModel>
 </CustomObject>
