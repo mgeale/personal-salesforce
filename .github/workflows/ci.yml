@@ -146,3 +146,12 @@ jobs:
                       changedPackagesJson=$(printf '%s\n' "${changedPackages[@]}" | jq -R . | jq -c -s .)
                   fi
                   echo "::set-output name=changes::$changedPackagesJson"
+
+            # Trigger packaging workflow if needed
+            - name: 'Trigger packaging workflow if needed'
+              uses: peter-evans/repository-dispatch@v1.1.0
+              if: ${{ steps.checkForChanges.outputs.changes != '[]' }}
+              with:
+                  token: ${{ secrets.BOT_ACCESS_TOKEN }}
+                  event-type: start-packaging
+                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }} }'
