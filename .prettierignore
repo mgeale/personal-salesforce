@@ -3,11 +3,12 @@
 #
 
 **/staticresources/**
-.localdevserver
+.sf
 .sfdx
 .vscode
+.localdevserver
+jsconfig.json
 
 coverage/
 core-app/main/default/classes/dilib/
 core-app/main/default/classes/fflib/
-portfolio-app/main/default/lwc/lineChart/__tests__/data/chartJs.js

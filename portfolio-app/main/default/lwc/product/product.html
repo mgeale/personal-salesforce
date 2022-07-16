@@ -1,31 +1,35 @@
 <template>
-  <article class="slds-card content">
-    <div if:true={product}>
-      <div class="slds-card__header slds-grid">
-        <header class="slds-media slds-media_center slds-has-flexi-truncate">
-          <div class="slds-media__body">
-            <h2 class="slds-card__header-title">
-              <span>{productName}</span>
-            </h2>
-          </div>
-        </header>
-      </div>
-      <div class="slds-card__body slds-card__body_inner">
-        <lightning-layout class="details">
-          <lightning-layout-item>
-            <img src={productImage} />
-          </lightning-layout-item>
-          <lightning-layout-item>
-            <div class="form details">
-              <div><label>Total:</label>{totalAmount}</div>
+    <article class="slds-card content">
+        <div if:true={product}>
+            <div class="slds-card__header slds-grid">
+                <header
+                    class="slds-media slds-media_center slds-has-flexi-truncate"
+                >
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>{productName}</span>
+                        </h2>
+                    </div>
+                </header>
             </div>
-          </lightning-layout-item>
-        </lightning-layout>
-      </div>
-      <div class="slds-var-m-around_medium">
-        <c-line-chart product-id={recordId}></c-line-chart>
-        <c-transaction-table product-id={recordId}></c-transaction-table>
-      </div>
-    </div>
-  </article>
+            <div class="slds-card__body slds-card__body_inner">
+                <lightning-layout class="details">
+                    <lightning-layout-item>
+                        <img src={productImage} />
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <div class="form details">
+                            <div><label>Total:</label>{totalAmount}</div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <div class="slds-var-m-around_medium">
+                <c-line-chart product-id={recordId}></c-line-chart>
+                <c-transaction-table
+                    product-id={recordId}
+                ></c-transaction-table>
+            </div>
+        </div>
+    </article>
 </template>
