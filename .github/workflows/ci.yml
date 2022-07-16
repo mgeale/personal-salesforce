@@ -6,7 +6,7 @@ on:
     workflow_dispatch:
     push:
         branches:
-            - main
+            - develop
         paths-ignore:
             - 'sfdx-project.json'
             - 'README.md'

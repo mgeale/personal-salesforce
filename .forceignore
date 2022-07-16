@@ -19,6 +19,6 @@ package.xml
 # Not required in Scratch Orgs
 core-app/main/default/installedPackages/sf_com_apps.installedPackage-meta.xml
 
-# FOR DEVS - exclude not required apps when using Scratch Orgs
+# EDIT - exclude when using Scratch Orgs
 #mortgage-app/
 #portfolio-app/
