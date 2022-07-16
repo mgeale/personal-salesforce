@@ -141,6 +141,6 @@ jobs:
               uses: peter-evans/repository-dispatch@v1.1.0
               if: ${{ steps.checkForChanges.outputs.changes != '[]' }}
               with:
-                  token: ${{ secrets.BOT_ACCESS_TOKEN }}
+                  token: ${{ secrets.REPO_ACCESS_TOKEN }}
                   event-type: start-packaging-pr
                   client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }} }'
