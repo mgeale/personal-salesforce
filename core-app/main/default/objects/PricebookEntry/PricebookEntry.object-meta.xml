@@ -102,14 +102,14 @@
     <enableFeeds>false</enableFeeds>
     <searchLayouts>
         <searchResultsAdditionalFields
-    >PRODUCT.NAME</searchResultsAdditionalFields>
+        >PRODUCT.NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRODUCT.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
+        >PRODUCT.CUSTOMER_PRODUCT_ID</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRODUCT.DEFAULT_PRICE</searchResultsAdditionalFields>
+        >PRODUCT.DEFAULT_PRICE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRODUCT2.DESCRIPTION</searchResultsAdditionalFields>
+        >PRODUCT2.DESCRIPTION</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-    >PRODUCT2.FAMILY_ENUM</searchResultsAdditionalFields>
+        >PRODUCT2.FAMILY_ENUM</searchResultsAdditionalFields>
     </searchLayouts>
 </CustomObject>

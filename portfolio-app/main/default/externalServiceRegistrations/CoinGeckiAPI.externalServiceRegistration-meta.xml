@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ExternalServiceRegistration xmlns="http://soap.sforce.com/2006/04/metadata">
     <label>CoinGeckiAPI</label>
     <namedCredential>CoinGecko</namedCredential>
@@ -28,7 +28,8 @@
     </operations>
     <operations>
         <active>true</active>
-        <name>getcoinscontractmarketx5fchartrangebyidandcontractx5faddress</name>
+        <name
+        >getcoinscontractmarketx5fchartrangebyidandcontractx5faddress</name>
     </operations>
     <operations>
         <active>true</active>

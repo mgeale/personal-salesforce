@@ -3,6 +3,11 @@
 #
 
 package.xml
+**appMenu
+**appSwitcher
+**objectTranslations
+**profiles
+**settings
 
 # LWC configuration files
 **/jsconfig.json
@@ -10,3 +15,10 @@ package.xml
 
 # LWC Jest
 **/__tests__/**
+
+# Not required in Scratch Orgs
+core-app/main/default/installedPackages/sf_com_apps.installedPackage-meta.xml
+
+# EDIT - exclude when using Scratch Orgs
+#mortgage-app/
+#portfolio-app/

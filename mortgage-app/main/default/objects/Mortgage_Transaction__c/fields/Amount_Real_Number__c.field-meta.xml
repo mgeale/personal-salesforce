@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Amount_Real_Number__c</fullName>
     <externalId>false</externalId>
-    <formula>IF( ISPICKVAL( Type__c , &apos;Repayment&apos;) ,  -Amount__c, Amount__c)</formula>
+    <formula
+    >IF( ISPICKVAL( Type__c , &apos;Repayment&apos;) ,  -Amount__c, Amount__c)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Amount Real Number</label>
     <precision>18</precision>

@@ -1,11 +1,11 @@
 .content {
-  background-color: #fafaf9;
-  border-radius: 0.25rem;
-  border: 1px solid rgb(221, 219, 218);
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 700px;
+    background-color: #fafaf9;
+    border-radius: 0.25rem;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 700px;
 }

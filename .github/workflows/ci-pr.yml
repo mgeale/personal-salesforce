@@ -48,12 +48,6 @@ jobs:
             - name: 'Unit test Lightning Web Components'
               run: npm run test:unit:coverage
 
-            # Upload code coverage data
-            - name: 'Upload code coverage for LWC to Codecov.io'
-              uses: codecov/codecov-action@v2.0.2
-              with:
-                  flags: LWC
-                  
     scratch-org-test:
         runs-on: ubuntu-latest
         if: ${{ github.actor != 'dependabot[bot]' }}
@@ -141,3 +135,12 @@ jobs:
                       changedPackagesJson=$(printf '%s\n' "${changedPackages[@]}" | jq -R . | jq -c -s .)
                   fi
                   echo "::set-output name=changes::$changedPackagesJson"
+
+            # Trigger packaging PR workflow
+            - name: 'Trigger packaging PR workflow if needed'
+              uses: peter-evans/repository-dispatch@v1.1.0
+              if: ${{ steps.checkForChanges.outputs.changes != '[]' }}
+              with:
+                  token: ${{ secrets.BOT_ACCESS_TOKEN }}
+                  event-type: start-packaging-pr
+                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }} }'
