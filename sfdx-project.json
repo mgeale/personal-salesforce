@@ -37,5 +37,9 @@
     "namespace": "",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "53.0",
-    "packageAliases": {}
+        "packageAliases": {
+        "CoreApp": "0Ho2w00000000UMCAY",
+        "PortfolioApp": "0Ho2w00000000URCAY",
+        "MortgageApp": "0Ho2w00000000UbCAI"
+    }
 }
