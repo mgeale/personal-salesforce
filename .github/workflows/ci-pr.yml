@@ -118,13 +118,13 @@ jobs:
                   set +e
                   changedPackages=()
                   if [ $(echo "$changedPaths" | grep -c '^core-app$') == 1 ]; then
-                      changedPackages+=( 'Core-App' )
+                      changedPackages+=( 'CoreApp' )
                   fi
                   if [ $(echo "$changedPaths" | grep -c '^portfolio-app$') == 1 ]; then
-                      changedPackages+=( 'Portfolio-App' )
+                      changedPackages+=( 'PortfolioApp' )
                   fi
                   if [ $(echo "$changedPaths" | grep -c '^mortgage-app$') == 1 ]; then
-                      changedPackages+=( 'Mortgage-App' )
+                      changedPackages+=( 'MortgageApp' )
                   fi
                   echo "Changed packages (${#changedPackages[@]}):"
                   for i in ${changedPackages[@]}; do
