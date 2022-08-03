@@ -9,6 +9,7 @@ package.xml
 **profiles
 **settings
 **reports
+**dashboards
 
 # LWC configuration files
 **/jsconfig.json
