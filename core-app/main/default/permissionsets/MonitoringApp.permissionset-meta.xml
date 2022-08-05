@@ -6,8 +6,4 @@
     </applicationVisibilities>
     <hasActivationRequired>false</hasActivationRequired>
     <label>MonitoringApp</label>
-    <tabSettings>
-        <tab>Home1</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
 </PermissionSet>
