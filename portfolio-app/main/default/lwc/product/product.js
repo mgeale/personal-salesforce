@@ -65,8 +65,6 @@ export default class Product extends LightningElement {
         this.subscribeToMessageChannel();
     }
 
-    disconnectedCallback() {}
-
     get productName() {
         return getFieldValue(this.product, PRODUCT_NAME);
     }

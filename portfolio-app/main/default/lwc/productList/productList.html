@@ -7,6 +7,8 @@
                 onselect={handleTreeItemSelected}
             ></lightning-tree>
         </template>
-        <template if:true={error}> {error} </template>
     </div>
+    <template if:true={error}>
+        <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
 </template>

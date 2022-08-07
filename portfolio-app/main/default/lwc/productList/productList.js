@@ -6,7 +6,6 @@ import PRODUCT_SELECTED_CHANNEL from '@salesforce/messageChannel/Product_Selecte
 
 export default class ProductList extends LightningElement {
     error;
-    tableData;
     treeData;
 
     @wire(CurrentPageReference) pageRef;
@@ -19,10 +18,8 @@ export default class ProductList extends LightningElement {
         if (error) {
             this.error = error;
             this.treeData = undefined;
-            this.tableData = undefined;
         } else if (data) {
             this.error = undefined;
-            this.tableData = data;
             const map = {};
             const items = [];
             data.forEach((field) => {
@@ -47,10 +44,6 @@ export default class ProductList extends LightningElement {
             this.treeData = items;
         }
     }
-
-    connectedCallback() {}
-
-    disconnectedCallback() {}
 
     handleTreeItemSelected(event) {
         const payload = { recordId: event.detail.name };

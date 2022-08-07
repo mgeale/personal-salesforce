@@ -3,13 +3,6 @@ import LineChart from 'c/lineChart';
 import { loadScript } from 'lightning/platformResourceLoader';
 import getBalances from '@salesforce/apex/BalanceController.getBalanceHistoryForProduct';
 
-const LOAD_SCRIPT_ERROR = {
-    body: { message: 'An internal server error has occurred' },
-    ok: false,
-    status: 400,
-    statusText: 'Bad Request'
-};
-
 jest.mock(
     '@salesforce/apex/BalanceController.getBalanceHistoryForProduct',
     () => {
@@ -24,27 +17,6 @@ jest.mock(
 );
 
 let mockScriptSuccess;
-
-jest.mock(
-    'lightning/platformResourceLoader',
-    () => {
-        return {
-            loadScript() {
-                return new Promise((resolve, reject) => {
-                    if (!mockScriptSuccess) {
-                        reject(LOAD_SCRIPT_ERROR);
-                    } else {
-                        global.moment = require('./../../staticrescources/chartJs');
-                        resolve();
-                    }
-                });
-            }
-        };
-    },
-    { virtual: true }
-);
-
-const GET_PRODUCTS = require('./data/getProducts.json');
 
 describe('c-line-chart', () => {
     beforeEach(() => {
@@ -73,7 +45,7 @@ describe('c-line-chart', () => {
         expect(domEl).not.toBeNull();
     });
 
-    it.skip('loads the ChartJS javascript and css static resources', () => {
+    it('loads the ChartJS javascript', () => {
         const CHARTJS_JS = 'chartJs';
 
         const element = createElement('c-line-chart', {
@@ -85,15 +57,17 @@ describe('c-line-chart', () => {
         expect(loadScript.mock.calls[0][1]).toEqual(CHARTJS_JS);
     });
 
-    it.skip('loads products', async () => {
+    it('shows the error panel element on product data load error', async () => {
         const element = createElement('c-line-chart', {
             is: LineChart
         });
         document.body.appendChild(element);
 
+        getBalances.error();
         await flushPromises();
-        getBalances.emit(GET_PRODUCTS);
-        return expect(null).not.toBeNull();
+
+        const errorPanelEl = element.shadowRoot.querySelector('c-error-panel');
+        return expect(errorPanelEl).not.toBeNull();
     });
 
     it('shows the error panel element on static resource load error', async () => {

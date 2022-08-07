@@ -12,6 +12,7 @@
                         <img
                             class="slds-align_absolute-center"
                             src={product.imageUrl}
+                            alt={product.name}
                         />
                         <div slot="footer">{product.balanceAUD}</div>
                         <div class="slds-card__body slds_card__body_inner">
@@ -36,4 +37,7 @@
             </template>
         </lightning-layout>
     </div>
+    <template if:true={error}>
+        <c-error-panel errors={error} type="inlineMessage"></c-error-panel>
+    </template>
 </template>

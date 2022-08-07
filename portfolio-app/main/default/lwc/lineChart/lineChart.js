@@ -17,7 +17,7 @@ export default class LineChart extends LightningElement {
     @wire(getBalances, { productId: '$productId' })
     apexBalances({ error, data }) {
         if (error) {
-            //TODO:
+            this.error = error;
         } else if (data) {
             this.balances = data.map((item) => {
                 return {
@@ -38,8 +38,6 @@ export default class LineChart extends LightningElement {
                 )
             };
             this.chart.update();
-        } else {
-            //TODO:
         }
     }
 
