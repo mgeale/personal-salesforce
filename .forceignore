@@ -19,8 +19,8 @@ package.xml
 **/__tests__/**
 
 # Not required in Scratch Orgs
-core-app/main/default/installedPackages/sf_com_apps.installedPackage-meta.xml
-core-app/main/default/profiles/Admin.profile-meta.xml
+sf_com_apps.installedPackage-meta.xml
+Admin.profile-meta.xml
 
 # EDIT - exclude when using Scratch Orgs
 #mortgage-app/
