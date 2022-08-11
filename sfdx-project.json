@@ -41,11 +41,8 @@
         "CoreApp": "0Ho2w000000CaupCAC",
         "PortfolioApp": "0Ho2w000000CauuCAC",
         "MortgageApp": "0Ho2w000000CauzCAC",
-        "CoreApp@0.1.0-4": "04t2w0000091WPVAA2",
-        "PortfolioApp@0.1.0-1": "04t2w0000091WPaAAM",
-        "MortgageApp@0.1.0-1": "04t2w0000091WPfAAM",
-        "CoreApp@0.1.0-5": "04t2w0000091WPkAAM",
-        "PortfolioApp@0.1.0-2": "04t2w0000091WPpAAM",
-        "MortgageApp@0.1.0-2": "04t2w0000091WPuAAM"
+        "MortgageApp@0.1.0-2": "04t2w0000091WPuAAM",
+        "CoreApp@0.1.0-14": "04t2w0000091WSoAAM",
+        "PortfolioApp@0.1.0-10": "04t2w0000091WStAAM"
     }
 }
