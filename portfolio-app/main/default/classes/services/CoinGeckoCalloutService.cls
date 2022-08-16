@@ -1,5 +1,5 @@
 public with sharing class CoinGeckoCalloutService extends RestClient implements CalloutService {
-    public static Map<String, Coin> makeCallout(
+    public static Map<String, Double> makeCallout(
         Map<String, List<Object>> params
     ) {
         HttpResponse response = makeApiCall(
@@ -10,10 +10,14 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
             '&vs_currencies=aud'
         );
 
-        Map<String, Coin> responseMap = new Map<String, Coin>();
+        Map<String, Double> responseMap = new Map<String, Double>();
         switch on response.getStatusCode() {
             when 200 {
-                responseMap = parse(response.getBody()).coins;
+                Parser p = parse(response.getBody());
+                for (String key : p.coins.keySet()) {
+                    Double price = p.coins.get(key).currencies.get('AUD');
+                    responseMap.put(key, price);
+                }
             }
             when else {
                 Log logger = Log.get();
