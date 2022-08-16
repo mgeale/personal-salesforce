@@ -30,31 +30,18 @@ public class CoinGeckoCalloutService_Test {
         );
         Test.setMock(HttpCalloutMock.class, mock);
 
-        CoinGeckoCalloutService service = new CoinGeckoCalloutService(
-            'namedCred'
-        );
-
         Map<String, List<String>> params = new Map<String, List<String>>{
             'externalIds' => new List<String>{ 'ethereum' }
         };
-        Map<String, CoinGeckoCalloutService.Coin> result = service.makeCallout(
+        Map<String, Decimal> result = CoinGeckoCalloutService.makeCallout(
             params
         );
 
         System.assertEquals(10, result.size());
-        System.assertEquals(
-            6178.0,
-            result.get('ethereum').currencies.get('aud')
-        );
-        System.assertEquals(
-            94.07,
-            result.get('avalanche-2').currencies.get('aud')
-        );
-        System.assertEquals(1.35, result.get('usd-coin').currencies.get('aud'));
-        System.assertEquals(
-            0.02921444,
-            result.get('cdai').currencies.get('aud')
-        );
-        System.assertEquals(1.7, result.get('0x').currencies.get('aud'));
+        System.assertEquals(6178.0, result.get('ethereum'));
+        System.assertEquals(94.07, result.get('avalanche-2'));
+        System.assertEquals(1.35, result.get('usd-coin'));
+        System.assertEquals(0.02921444, result.get('cdai'));
+        System.assertEquals(1.7, result.get('0x'));
     }
 }
