@@ -39,7 +39,7 @@ public class CapitalGainsTriggerHandler_Test {
         );
         List<Capital_Gains__c> cgList = new List<Capital_Gains__c>();
         cgList.add(cg);
-        CapitalGainsTriggerHandler.checkAmountTaxed(cgList);
+        CapitalGainsTriggerHandler.beforeInsert(cgList);
 
         List<Asset> result = [
             SELECT Amount_Taxed__c
@@ -59,7 +59,7 @@ public class CapitalGainsTriggerHandler_Test {
             Purchase__c = testData.get('a2'),
             Sold__c = testData.get('a1')
         );
-        CapitalGainsTriggerHandler.checkAmountTaxed(
+        CapitalGainsTriggerHandler.beforeInsert(
             new List<Capital_Gains__c>{ cg1 }
         );
 
@@ -68,7 +68,7 @@ public class CapitalGainsTriggerHandler_Test {
             Purchase__c = testData.get('a2'),
             Sold__c = testData.get('a1')
         );
-        CapitalGainsTriggerHandler.checkAmountTaxed(
+        CapitalGainsTriggerHandler.beforeInsert(
             new List<Capital_Gains__c>{ cg2 }
         );
 
@@ -92,7 +92,7 @@ public class CapitalGainsTriggerHandler_Test {
         );
         List<Capital_Gains__c> cgList = new List<Capital_Gains__c>();
         cgList.add(cg);
-        CapitalGainsTriggerHandler.checkAmountTaxed(cgList);
+        CapitalGainsTriggerHandler.beforeInsert(cgList);
 
         List<Asset> result = [
             SELECT Amount_Taxed__c
@@ -112,7 +112,7 @@ public class CapitalGainsTriggerHandler_Test {
             Purchase__c = testData.get('a2'),
             Sold__c = testData.get('a1')
         );
-        CapitalGainsTriggerHandler.checkAmountTaxed(
+        CapitalGainsTriggerHandler.beforeInsert(
             new List<Capital_Gains__c>{ cg1 }
         );
 
@@ -121,7 +121,7 @@ public class CapitalGainsTriggerHandler_Test {
             Purchase__c = testData.get('a2'),
             Sold__c = testData.get('a1')
         );
-        CapitalGainsTriggerHandler.checkAmountTaxed(
+        CapitalGainsTriggerHandler.beforeInsert(
             new List<Capital_Gains__c>{ cg2 }
         );
 
