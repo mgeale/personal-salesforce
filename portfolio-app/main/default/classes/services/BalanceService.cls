@@ -1,5 +1,5 @@
 public with sharing class BalanceService {
-    public static Boolean create(PricebookEntry[] entries) {
+    public static void create(PricebookEntry[] entries) {
         ID[] productIds = new List<ID>{};
         for (PricebookEntry e : entries) {
             productIds.add(e.Product2Id);
@@ -23,10 +23,17 @@ public with sharing class BalanceService {
             );
         }
 
-        Boolean[] isSuccess = new List<Boolean>{};
         for (Database.SaveResult sr : Database.insert(balances, false)) {
-            isSuccess.add(sr.isSuccess());
+            Log logger = Log.get();
+            if (!sr.isSuccess()) {
+                logger.add(
+                    String.format(
+                        'Failed to create Balance__c. Errors {0}.',
+                        new List<Object>{ sr.getErrors().toString() }
+                    )
+                );
+            }
+            logger.publish();
         }
-        return isSuccess.contains(true);
     }
 }
