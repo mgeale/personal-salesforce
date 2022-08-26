@@ -1,39 +1,51 @@
 public with sharing class CapitalGainsService {
-    public static void processTotalTaxedAmount(Capital_Gains__c[] cgList) {
-        for (Capital_Gains__c capitalGains : cgList) {
-            Asset purchaseAsset = [
+    public static Capital_Gains__c[] allocateToAsset(
+        Capital_Gains__c[] capitalGainsList
+    ) {
+        Set<Id> ids = new Set<Id>();
+        for (Capital_Gains__c capitalGains : capitalGainsList) {
+            ids.add(capitalGains.Purchase__c);
+            ids.add(capitalGains.Sold__c);
+        }
+
+        Map<Id, Asset> assetMap = new Map<Id, Asset>(
+            [
                 SELECT
                     Quantity__c,
-                    (SELECT id, Amount__c FROM Capital_Gains_Sold__r)
+                    (SELECT Amount__c FROM Capital_Gains_Sold__r),
+                    (SELECT Amount__c FROM Capital_Gains_Purchase__r)
                 FROM Asset
-                WHERE id = :capitalGains.Sold__c
-            ];
-            updateAmountTaxed(
+                WHERE id IN :ids
+            ]
+        );
+
+        for (Capital_Gains__c capitalGains : capitalGainsList) {
+            Asset purchaseAsset = assetMap.get(capitalGains.Sold__c);
+            calculateAmountByAsset(
                 purchaseAsset,
                 purchaseAsset.Capital_Gains_Sold__r,
                 capitalGains
             );
 
-            Asset soldAsset = [
-                SELECT
-                    Quantity__c,
-                    (SELECT Amount__c FROM Capital_Gains_Purchase__r)
-                FROM Asset
-                WHERE id = :capitalGains.Purchase__c
-            ];
-            updateAmountTaxed(
+            Asset soldAsset = assetMap.get(capitalGains.Purchase__c);
+            calculateAmountByAsset(
                 soldAsset,
                 soldAsset.Capital_Gains_Purchase__r,
                 capitalGains
             );
 
-            update soldAsset;
-            update purchaseAsset;
+            if (capitalGains.hasErrors()) {
+                throw new DmlException(
+                    String.valueOf(capitalGains.getErrors())
+                );
+            }
         }
+
+        Database.update(assetMap.values());
+        return capitalGainsList;
     }
 
-    @TestVisible
-    private static void updateAmountTaxed(
+    private static void calculateAmountByAsset(
         Asset a,
         Capital_Gains__c[] cgList,
         Capital_Gains__c capitalGains
@@ -47,9 +59,10 @@ public with sharing class CapitalGainsService {
         Decimal total = totalPast + capitalGains.Amount__c;
         if (total > a.Quantity__c) {
             capitalGains.addError(
-                total +
-                ' total is greater than maximum of ' +
-                a.Quantity__c
+                String.format(
+                    '{0} total is greater than maximum of {1}',
+                    new List<Object>{ total, a.Quantity__c }
+                )
             );
         } else {
             a.Amount_Taxed__c = total;
