@@ -4,8 +4,8 @@ public with sharing class BalanceService {
         for (PricebookEntry e : entries) {
             productIds.add(e.Product2Id);
         }
-        Map<String, Decimal> totalAmounts = new AssetService(true)
-            .getTotals(productIds);
+        Map<String, Decimal> totalAmounts = new AssetSelector()
+            .getTotals(productIds, true);
 
         Balance__c[] balances = new List<Balance__c>{};
         for (PricebookEntry e : entries) {
@@ -28,9 +28,5 @@ public with sharing class BalanceService {
             isSuccess.add(sr.isSuccess());
         }
         return isSuccess.contains(true);
-    }
-
-    public Balance__c[] getBalanceByProduct(Id productId, Integer limitCount) {
-        return new BalanceSelector().selectByProductId(productId, limitCount);
     }
 }
