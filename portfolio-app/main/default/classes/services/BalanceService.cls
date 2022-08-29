@@ -1,11 +1,11 @@
 public with sharing class BalanceService {
-    public static void create(PricebookEntry[] entries) {
-        ID[] productIds = new List<ID>{};
+    public static void create(PricebookEntry[] entries, Boolean allOrNone) {
+        Id[] productIds = new List<Id>{};
         for (PricebookEntry e : entries) {
             productIds.add(e.Product2Id);
         }
         Map<String, Decimal> totalAmounts = new AssetSelector()
-            .getTotals(productIds, true);
+            .sumQuantitiesByProduct(productIds, true);
 
         Balance__c[] balances = new List<Balance__c>{};
         for (PricebookEntry e : entries) {
@@ -23,7 +23,7 @@ public with sharing class BalanceService {
             );
         }
 
-        for (Database.SaveResult sr : Database.insert(balances, false)) {
+        for (Database.SaveResult sr : Database.insert(balances, allOrNone)) {
             Log logger = Log.get();
             if (!sr.isSuccess()) {
                 logger.add(
