@@ -1,5 +1,5 @@
 import { LightningElement, api, wire } from 'lwc';
-import getTransactionHistory from '@salesforce/apex/AssetController.getTransactionHistory';
+import getTransactionHistory from '@salesforce/apex/AssetController.getAssetsByProductId';
 
 export default class TransactionTable extends LightningElement {
     @api productId;
