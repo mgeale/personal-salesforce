@@ -28,6 +28,7 @@ public without sharing class LogEventService {
             logEvents.add(
                 new LogEvent__c(
                     Log_Data__c = event.Message,
+                    Quiddity__c = System.Quiddity.BATCH_APEX.name(),
                     Request_Id__c = event.RequestId,
                     Severity__c = LogSeverity.Error.name()
                 )
