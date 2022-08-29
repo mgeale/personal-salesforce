@@ -33,12 +33,12 @@ public class BalanceService_Test {
         Id pricebookId = Test.getStandardPricebookId();
 
         Test.startTest();
-        Boolean isSuccess = BalanceService.create(
+        BalanceService.create(
             new PricebookEntrySelector()
-                .selectByPricebookId(new Set<Id>{ priceBookId })
+                .selectByPricebookId(new Set<Id>{ priceBookId }),
+            false
         );
         Test.stopTest();
-        System.assert(isSuccess);
 
         List<Balance__c> result = [
             SELECT Balance__c, Balance_AUD__c

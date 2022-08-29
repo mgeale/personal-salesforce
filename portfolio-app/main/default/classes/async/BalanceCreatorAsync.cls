@@ -9,7 +9,8 @@ public with sharing class BalanceCreatorAsync implements Queueable {
     public void execute(QueueableContext ctx) {
         BalanceService.create(
             new PricebookEntrySelector()
-                .selectByPricebookId(new Set<Id>{ this.priceBookId })
+                .selectByPricebookId(new Set<Id>{ this.priceBookId }),
+            false
         );
     }
 }
