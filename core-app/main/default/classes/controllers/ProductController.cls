@@ -8,14 +8,14 @@ public with sharing class ProductController {
 
     @AuraEnabled(cacheable=true)
     public static Product2[] getProductList() {
-        Boolean isActive = true;
         Integer limitCount = 10;
+        Boolean isActive = true;
         Boolean includePricebookEntries = true;
         Boolean includeBalances = true;
         return new ProductSelector()
             .selectAll(
-                isActive,
                 limitCount,
+                isActive,
                 includePricebookEntries,
                 includeBalances
             );
