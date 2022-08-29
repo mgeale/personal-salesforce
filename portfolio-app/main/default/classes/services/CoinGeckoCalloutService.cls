@@ -59,6 +59,7 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 if (parser.getCurrentToken() == System.JSONToken.FIELD_NAME) {
                     String text = parser.getText();
                     if (parser.nextToken() != System.JSONToken.VALUE_NULL) {
+                        System.debug(parser.getDoubleValue());
                         this.currencies.put(text, parser.getDoubleValue());
                     }
                 }
