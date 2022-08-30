@@ -1,29 +1,41 @@
 global class HomeServerConnection extends DataSource.Connection {
+    private String certificateName;
+    private String endpoint;
+    private String oauthToken;
+    private String password;
+    private DataSource.IdentityType principalType;
+    private DataSource.AuthenticationProtocol protocol;
+    private String username;
+
     global HomeServerConnection(DataSource.ConnectionParams connectionParams) {
+        this.certificateName = connectionParams.certificateName;
+        this.endpoint = connectionParams.endpoint;
+        this.oauthToken = connectionParams.oauthToken;
+        this.password = connectionParams.password;
+        this.principalType = connectionParams.principalType;
+        this.protocol = connectionParams.protocol;
+        this.username = connectionParams.username;
     }
 
     override global DataSource.Table[] sync() {
-        DataSource.Column[] columns = new List<DataSource.Column>{
-            DataSource.Column.text('ExternalId', 255),
-            DataSource.Column.text('Balance Name', 255),
-            DataSource.Column.number('Balance', 18, 9),
-            DataSource.Column.number('Balance AUD', 18, 2),
-            DataSource.Column.lookup('Price Book', 'Pricebook2'),
-            DataSource.Column.lookup('Product', 'Product2'),
-            DataSource.Column.url('DisplayUrl')
-        };
+        DataSource.Table[] tables = new List<DataSource.Table>{};
+        // TODO: add sync()
+        tables.add();
 
-        return new List<DataSource.Table>{
-            DataSource.Table.get('Balance', 'Title', columns)
-        };
+        return tables;
     }
 
     override global DataSource.TableResult query(
         DataSource.QueryContext context
     ) {
-        List<Map<String, Object>> rows = HomeServerCalloutService.get(
-            context.tableSelection
-        );
+        List<Map<String, Object>> rows;
+        try {
+            // TODO: add callout
+            rows = new List<Map<String, Object>>();
+        } catch (Exception e) {
+            Log.get().publish(e);
+        }
+
         List<Map<String, Object>> q = DataSource.QueryUtils.process(
             context,
             rows
@@ -38,7 +50,8 @@ global class HomeServerConnection extends DataSource.Connection {
 
         for (Map<String, Object> row : context.rows) {
             try {
-                results.add(HomeServerCalloutService.create(row));
+                // TODO: add callout
+                results.add();
             } catch (Exception e) {
                 Log.get().publish(e);
             }
@@ -54,7 +67,8 @@ global class HomeServerConnection extends DataSource.Connection {
 
         for (String externalId : context.externalIds) {
             try {
-                results.add(HomeServerCalloutService.del(externalId));
+                // TODO: add callout
+                results.add();
             } catch (Exception e) {
                 Log.get().publish(e);
             }
