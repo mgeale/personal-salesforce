@@ -1,0 +1,47 @@
+@isTest
+public class CoinGeckoCalloutService_Test {
+    static final String CALLOUT_RESPONSE = '{"ethereum":{"AUD":6178.0},"avalanche-2":{"AUD":94.07},"maker":{"AUD":3930.0},"usd-coin":{"AUD":1.35},"tether":{"AUD":1.35},"0x":{"AUD":1.7},"augur":{"AUD":34.03},"dai":{"AUD":1.35},"cdai":{"AUD":0.02921444},"compound-usd-coin":{"AUD":0.03002133}}';
+
+    @isTest
+    public static void shouldParseResponse() {
+        Test.startTest();
+        CoinGeckoCalloutService.Parser result = CoinGeckoCalloutService.parse(
+            CALLOUT_RESPONSE
+        );
+        Test.stopTest();
+
+        CoinGeckoCalloutService.Coin ethereum = result.coins.get('ethereum');
+        Double ethereumAUDprice = ethereum.currencies.get('AUD');
+        System.assertEquals(6178.0, ethereumAUDprice);
+
+        CoinGeckoCalloutService.Coin avalanche = result.coins.get(
+            'avalanche-2'
+        );
+        Double avalancheAUDprice = avalanche.currencies.get('AUD');
+        System.assertEquals(94.07, avalancheAUDprice);
+    }
+
+    @isTest
+    public static void shouldMakeCallout() {
+        MockHttpCalloutResponse mock = new MockHttpCalloutResponse(
+            200,
+            CALLOUT_RESPONSE,
+            null
+        );
+        Test.setMock(HttpCalloutMock.class, mock);
+
+        Map<String, List<String>> params = new Map<String, List<String>>{
+            'externalIds' => new List<String>{ 'ethereum' }
+        };
+        Map<String, Decimal> result = CoinGeckoCalloutService.makeCallout(
+            params
+        );
+
+        System.assertEquals(10, result.size());
+        System.assertEquals(6178.0, result.get('ethereum'));
+        System.assertEquals(94.07, result.get('avalanche-2'));
+        System.assertEquals(1.35, result.get('usd-coin'));
+        System.assertEquals(0.02921444, result.get('cdai'));
+        System.assertEquals(1.7, result.get('0x'));
+    }
+}

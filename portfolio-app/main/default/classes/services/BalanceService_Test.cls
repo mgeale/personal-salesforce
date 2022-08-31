@@ -1,7 +1,7 @@
 @isTest
-public class BalanceCreatorQueueable_Test {
-    @isTest
-    public static void shouldCreateBalanceEntries() {
+public class BalanceService_Test {
+    @TestSetup
+    static void makeData() {
         Product2 prod = (Product2) TestDataFactory.createSObject(
             'Product2',
             new Map<String, Object>{
@@ -26,15 +26,26 @@ public class BalanceCreatorQueueable_Test {
             Name = 'blah',
             AccountId = acc.id
         );
+    }
+
+    @isTest
+    public static void shouldCreateBalanceEntries() {
+        Id pricebookId = Test.getStandardPricebookId();
 
         Test.startTest();
-        System.enqueueJob(new BalanceCreatorQueueable(pricebookId));
+        BalanceService.create(
+            new PricebookEntrySelector()
+                .selectByPricebookId(new Set<Id>{ priceBookId }),
+            false
+        );
         Test.stopTest();
 
         List<Balance__c> result = [
             SELECT Balance__c, Balance_AUD__c
             FROM Balance__c
-            WHERE Price_Book__c = :pricebookId AND Product__c = :prod.id
+            WHERE
+                Price_Book__c = :pricebookId
+                AND Product__c = :[SELECT id FROM Product2 LIMIT 1].id
         ];
         System.assertEquals(10, result[0].Balance__c);
         System.assertEquals(15, result[0].Balance_AUD__c);
