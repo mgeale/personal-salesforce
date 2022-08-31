@@ -20,8 +20,16 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 }
             }
             when else {
-                Log logger = Log.get();
-                logger.publish('Error: ' + response.getBody());
+                Log.get()
+                    .publish(
+                        String.format(
+                            'CoinGeckoCalloutService failed {0}. {1}',
+                            new List<Object>{
+                                response.getStatusCode(),
+                                response.getBody()
+                            }
+                        )
+                    );
             }
         }
 
