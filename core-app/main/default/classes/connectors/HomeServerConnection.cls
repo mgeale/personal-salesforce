@@ -7,6 +7,8 @@ global class HomeServerConnection extends DataSource.Connection {
     private DataSource.AuthenticationProtocol protocol;
     private String username;
 
+    public Map<String, ExternalDataSource> calloutServices { get; set; }
+
     global HomeServerConnection(DataSource.ConnectionParams connectionParams) {
         this.certificateName = connectionParams.certificateName;
         this.endpoint = connectionParams.endpoint;
@@ -19,8 +21,10 @@ global class HomeServerConnection extends DataSource.Connection {
 
     override global DataSource.Table[] sync() {
         DataSource.Table[] tables = new List<DataSource.Table>{};
-        // TODO: add sync()
-        tables.add();
+
+        for (ExternalDataSource source : calloutServices.values()) {
+            tables.add(source.sync());
+        }
 
         return tables;
     }
@@ -28,30 +32,31 @@ global class HomeServerConnection extends DataSource.Connection {
     override global DataSource.TableResult query(
         DataSource.QueryContext context
     ) {
-        List<Map<String, Object>> rows;
+        ExternalDataSource source = calloutServices.get(
+            context.tableSelection.tableSelected
+        );
+
         try {
-            // TODO: add callout
-            rows = new List<Map<String, Object>>();
+            List<Map<String, Object>> rows = source.query(
+                context.tableSelection
+            );
+            // List<Map<String, Object>> q = DataSource.QueryUtils.process(context, rows); // Not for production
+            return DataSource.TableResult.get(context, rows);
         } catch (Exception e) {
             Log.get().publish(e);
+            return DataSource.TableResult.error(e.getMessage());
         }
-
-        List<Map<String, Object>> q = DataSource.QueryUtils.process(
-            context,
-            rows
-        ); // Not for production
-        return DataSource.TableResult.get(context, q);
     }
 
     global override DataSource.UpsertResult[] upsertRows(
         DataSource.UpsertContext context
     ) {
         DataSource.UpsertResult[] results = new List<DataSource.UpsertResult>{};
+        ExternalDataSource source = calloutServices.get(context.tableSelected);
 
         for (Map<String, Object> row : context.rows) {
             try {
-                // TODO: add callout
-                results.add();
+                results.add(source.upsertRow(row));
             } catch (Exception e) {
                 Log.get().publish(e);
             }
@@ -64,11 +69,11 @@ global class HomeServerConnection extends DataSource.Connection {
         DataSource.DeleteContext context
     ) {
         DataSource.DeleteResult[] results = new List<DataSource.DeleteResult>{};
+        ExternalDataSource source = calloutServices.get(context.tableSelected);
 
         for (String externalId : context.externalIds) {
             try {
-                // TODO: add callout
-                results.add();
+                results.add(source.deleteRow(externalId));
             } catch (Exception e) {
                 Log.get().publish(e);
             }
