@@ -1,6 +1,6 @@
 @isTest
 public class CoinGeckoCalloutService_Test {
-    static final String CALLOUT_RESPONSE = '{"ethereum":{"AUD":6178.0},"avalanche-2":{"AUD":94.07},"maker":{"AUD":3930.0},"usd-coin":{"AUD":1.35},"tether":{"AUD":1.35},"0x":{"AUD":1.7},"augur":{"AUD":34.03},"dai":{"AUD":1.35},"cdai":{"AUD":0.02921444},"compound-usd-coin":{"AUD":0.03002133}}';
+    static final String CALLOUT_RESPONSE = '{"ethereum":{"aud":6178.0},"avalanche-2":{"aud":94.07},"maker":{"aud":3930.0},"usd-coin":{"aud":1.35},"tether":{"aud":1.35},"0x":{"aud":1.7},"augur":{"aud":34.03},"dai":{"aud":1.35},"cdai":{"aud":0.02921444},"compound-usd-coin":{"aud":0.03002133}}';
 
     @isTest
     public static void shouldParseResponse() {
@@ -11,13 +11,13 @@ public class CoinGeckoCalloutService_Test {
         Test.stopTest();
 
         CoinGeckoCalloutService.Coin ethereum = result.coins.get('ethereum');
-        Double ethereumAUDprice = ethereum.currencies.get('AUD');
+        Double ethereumAUDprice = ethereum.currencies.get('aud');
         System.assertEquals(6178.0, ethereumAUDprice);
 
         CoinGeckoCalloutService.Coin avalanche = result.coins.get(
             'avalanche-2'
         );
-        Double avalancheAUDprice = avalanche.currencies.get('AUD');
+        Double avalancheAUDprice = avalanche.currencies.get('aud');
         System.assertEquals(94.07, avalancheAUDprice);
     }
 
