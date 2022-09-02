@@ -10,7 +10,7 @@ public with sharing class BalanceService {
         Balance__c[] balances = new List<Balance__c>{};
         for (PricebookEntry e : entries) {
             Decimal amount = totalAmounts.get(e.Product2Id);
-            if (amount == 0) {
+            if (amount == 0 || amount == null) {
                 continue;
             }
             balances.add(
