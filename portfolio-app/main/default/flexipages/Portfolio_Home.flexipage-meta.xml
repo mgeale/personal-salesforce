@@ -7,12 +7,6 @@
                 <identifier>c_productHome</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>productHome</componentName>
-                <identifier>c_productHome1</identifier>
-            </componentInstance>
-        </itemInstances>
         <name>region1</name>
         <type>Region</type>
     </flexiPageRegions>

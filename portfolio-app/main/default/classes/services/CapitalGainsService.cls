@@ -60,7 +60,7 @@ public with sharing class CapitalGainsService {
         if (total > a.Quantity__c) {
             capitalGains.addError(
                 String.format(
-                    '{0} total is greater than maximum of {1}',
+                    '{0} total is greater than maximum of {1}.',
                     new List<Object>{ total, a.Quantity__c }
                 )
             );

@@ -33,7 +33,12 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
 
     public void finish(Database.BatchableContext bc) {
         if (this.isSuccess && this.doChainJob) {
-            System.enqueueJob(new BalanceCreatorAsync(this.priceBookId));
+            QueueParameters queue = (QueueParameters) Type.forName(
+                    'BalanceCreatorAsync'
+                )
+                .newInstance();
+            queue.setRecordId(this.priceBookId);
+            System.enqueueJob(queue);
         }
     }
 }

@@ -15,13 +15,22 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
             when 200 {
                 Parser p = parse(response.getBody());
                 for (String key : p.coins.keySet()) {
-                    Double price = p.coins.get(key).currencies.get('AUD');
+                    System.debug(p.coins.get(key));
+                    Double price = p.coins.get(key).currencies.get('aud');
                     responseMap.put(key, price);
                 }
             }
             when else {
-                Log logger = Log.get();
-                logger.publish('Error: ' + response.getBody());
+                Log.get()
+                    .publish(
+                        String.format(
+                            'CoinGeckoCalloutService failed {0}. {1}',
+                            new List<Object>{
+                                response.getStatusCode(),
+                                response.getBody()
+                            }
+                        )
+                    );
             }
         }
 
