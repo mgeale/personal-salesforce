@@ -15,7 +15,8 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
             when 200 {
                 Parser p = parse(response.getBody());
                 for (String key : p.coins.keySet()) {
-                    Double price = p.coins.get(key).currencies.get('AUD');
+                    System.debug(p.coins.get(key));
+                    Double price = p.coins.get(key).currencies.get('aud');
                     responseMap.put(key, price);
                 }
             }
