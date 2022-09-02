@@ -70,7 +70,7 @@ public class ProductSelector extends fflib_SObjectSelector {
         Boolean isActive,
         Map<String, QueryParams> childQueries
     ) {
-        fflib_QueryFactory parent = new fflib_QueryFactory(Product2.SObjectType)
+        fflib_QueryFactory parent = newQueryFactory()
             .setLimit(limitCount)
             .setCondition('IsActive = :isActive');
 
