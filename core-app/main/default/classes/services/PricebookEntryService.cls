@@ -20,7 +20,7 @@ public with sharing class PricebookEntryService {
             if (!sr.isSuccess()) {
                 logger.add(
                     String.format(
-                        'Failed to create PricebookEntry. Errors {0}.',
+                        'PricebookEntry.create {0}',
                         new List<Object>{ sr.getErrors().toString() }
                     )
                 );

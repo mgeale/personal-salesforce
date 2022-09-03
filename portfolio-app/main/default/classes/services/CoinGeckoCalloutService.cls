@@ -24,7 +24,7 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 Log.get()
                     .publish(
                         String.format(
-                            'CoinGeckoCalloutService failed {0}. {1}',
+                            'CoinGeckoCalloutService.makeCallout {0} {1}',
                             new List<Object>{
                                 response.getStatusCode(),
                                 response.getBody()
