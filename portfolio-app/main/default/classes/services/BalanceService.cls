@@ -28,7 +28,7 @@ public with sharing class BalanceService {
             if (!sr.isSuccess()) {
                 logger.add(
                     String.format(
-                        'Failed to create Balance__c. Errors {0}.',
+                        'BalanceService.create {0}',
                         new List<Object>{ sr.getErrors().toString() }
                     )
                 );
