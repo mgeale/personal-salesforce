@@ -7,7 +7,7 @@ on:
     pull_request:
         types: [opened, edited, synchronize, reopened]
         branches-ignore:
-            - 'auto/packaging*'
+            - 'auto/packaging**'
 
 # Jobs to be executed
 jobs:
