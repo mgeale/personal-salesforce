@@ -7,9 +7,5 @@ trigger PriceBookTrigger on Pricebook2(
     after delete,
     after undelete
 ) {
-    Boolean isDisabled = Trigger_Settings__c.getOrgDefaults()
-        .Disable_Pricebook_Trigger__c;
-    if (!isDisabled) {
-        new PriceBookTriggerHandler().run();
-    }
+    new PriceBookTriggerHandler().run();
 }

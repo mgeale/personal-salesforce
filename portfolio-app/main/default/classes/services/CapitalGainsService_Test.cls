@@ -2,9 +2,7 @@
 public class CapitalGainsService_Test {
     @TestSetup
     static void makeData() {
-        Trigger_Settings__c triggerSettings = Trigger_Settings__c.getOrgDefaults();
-        triggerSettings.Disable_Capital_Gains_Trigger__c = true;
-        upsert triggerSettings;
+        //TODO: block trigger during setup
 
         Account acc = (Account) TestDataFactory.createSObject('Account');
         Product2 product = (Product2) TestDataFactory.createSObject('Product2');
