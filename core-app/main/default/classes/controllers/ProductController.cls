@@ -12,8 +12,7 @@ public with sharing class ProductController {
         Boolean isActive = true;
         Boolean includePricebookEntries = true;
         Boolean includeBalances = true;
-        return new ProductSelector()
-            .selectAll(
+        return new ProductSelector().selectAll(
                 limitCount,
                 isActive,
                 includePricebookEntries,
