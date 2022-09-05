@@ -5,7 +5,7 @@
     name="Default ruleset used by the CodeClimate Engine for Salesforce.com Apex"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd"
 >
-   <description></description>
+   <description />
    <exclude-pattern>.*/.sfdx/.*</exclude-pattern>
    <exclude-pattern>.*/dilib/.*</exclude-pattern>
    <exclude-pattern>.*/fflib-common/.*</exclude-pattern>
@@ -108,14 +108,22 @@
    </rule>
 
    <!-- TESTS -->
-   <!-- <rule ref="category/apex/bestpractices.xml/ApexAssertionsShouldIncludeMessage"><priority>4</priority></rule> -->
-   <rule ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation">
+   <rule
+        ref="category/apex/bestpractices.xml/ApexAssertionsShouldIncludeMessage"
+    ><priority>4</priority></rule>
+   <rule
+        ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation"
+    >
       <priority>4</priority>
    </rule>
-   <rule ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveAsserts">
+   <rule
+        ref="category/apex/bestpractices.xml/ApexUnitTestClassShouldHaveAsserts"
+    >
       <priority>3</priority>
    </rule>
-   <rule ref="category/apex/bestpractices.xml/ApexUnitTestShouldNotUseSeeAllDataTrue">
+   <rule
+        ref="category/apex/bestpractices.xml/ApexUnitTestShouldNotUseSeeAllDataTrue"
+    >
       <priority>3</priority>
    </rule>
 
