@@ -110,7 +110,9 @@
    <!-- TESTS -->
    <rule
         ref="category/apex/bestpractices.xml/ApexAssertionsShouldIncludeMessage"
-    ><priority>4</priority></rule>
+    >
+      <priority>4</priority>
+   </rule>
    <rule
         ref="category/apex/bestpractices.xml/ApexUnitTestMethodShouldHaveIsTestAnnotation"
     >
