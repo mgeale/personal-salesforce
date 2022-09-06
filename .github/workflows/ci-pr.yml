@@ -65,11 +65,11 @@ jobs:
 
             # PMD Apex
             - name: 'PMD Apex'
-              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd'
+              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd' --severity-threshold 3
 
             # Lint LWC / Aura
             - name: 'Lint Lightning Web Components / Aura Components'
-              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js'
+              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js' --severity-threshold 3
 
             # LWC unit tests
             - name: 'Unit test Lightning Web Components'
