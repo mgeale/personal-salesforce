@@ -14,10 +14,31 @@ jobs:
     # Formatting and linting only runs on human-submitted PRs
     format-lint-lwc-tests:
         runs-on: ubuntu-latest
+        if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
+            # Install Salesforce CLI
+            - name: 'Install Salesforce CLI'
+              run: |
+                  wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+                  mkdir ~/sfdx
+                  tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+                  echo "$HOME/sfdx/bin" >> $GITHUB_PATH
+                  ~/sfdx/bin/sfdx version
+
             # Checkout the source code
             - name: 'Checkout source code'
               uses: actions/checkout@v2
+
+            # Install JDK
+            - name: 'Install JDK'
+              uses: actions/setup-java@v3
+              with:
+                  distribution: 'temurin'
+                  java-version: '17'
+
+            # Install SFDX Scanner
+            - name: 'Install SFDX Scanner'
+              run: sfdx plugins:install @salesforce/sfdx-scanner@latest-pilot
 
             # Install Volta to enforce proper node and package manager versions
             - name: 'Install Volta'
@@ -42,9 +63,13 @@ jobs:
             - name: 'Code formatting verification with Prettier'
               run: npm run prettier:verify
 
+            # PMD Apex
+            - name: 'PMD Apex'
+              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd'
+
             # Lint LWC / Aura
             - name: 'Lint Lightning Web Components / Aura Components'
-              run: npm run lint
+              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js'
 
             # LWC unit tests
             - name: 'Unit test Lightning Web Components'
