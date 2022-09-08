@@ -24,18 +24,18 @@ public without sharing class LogEventService {
     }
 
     public static void create(BatchApexErrorEvent[] events) {
-        Set<Id> asyncApexJobIds = new Set<Id>();
-        for (BatchApexErrorEvent evt : Trigger.new) {
-            asyncApexJobIds.add(evt.events);
-        }
+        // Set<Id> asyncApexJobIds = new Set<Id>();
+        // for (BatchApexErrorEvent evt : events) {
+        //     asyncApexJobIds.add(evt.events);
+        // }
 
-        Map<Id, AsyncApexJob> jobs = new Map<Id, AsyncApexJob>(
-            [
-                SELECT id, ApexClass.Name
-                FROM AsyncApexJob
-                WHERE Id IN :asyncApexJobIds
-            ]
-        );
+        // Map<Id, AsyncApexJob> jobs = new Map<Id, AsyncApexJob>(
+        //     [
+        //         SELECT id, ApexClass.Name
+        //         FROM AsyncApexJob
+        //         WHERE Id IN :asyncApexJobIds
+        //     ]
+        // );
 
         LogEvent__c[] logEvents = new List<LogEvent__c>{};
         for (BatchApexErrorEvent event : events) {

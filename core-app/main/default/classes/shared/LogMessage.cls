@@ -88,8 +88,8 @@ public with sharing class LogMessage {
             'Exception: [{0}] {1} \n Fields: {2} \n StackTrace: {3}',
             new List<String>{
                 ex.getTypeName(),
-                ex.getDmlMessage(),
-                ex.getDmlFieldNames(),
+                // ex.getDmlMessage(),
+                // ex.getDmlFieldNames(),
                 ex.getStackTraceString()
             }
         );
