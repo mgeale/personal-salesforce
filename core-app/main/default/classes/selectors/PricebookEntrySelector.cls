@@ -1,4 +1,4 @@
-public class PricebookEntrySelector extends fflib_SObjectSelector {
+public inherited sharing class PricebookEntrySelector extends fflib_SObjectSelector {
     public List<Schema.SObjectField> getSObjectFieldList() {
         return new List<Schema.SObjectField>{
             PricebookEntry.Id,

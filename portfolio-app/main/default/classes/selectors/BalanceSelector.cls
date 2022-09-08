@@ -1,4 +1,4 @@
-public class BalanceSelector extends fflib_SObjectSelector {
+public inherited sharing class BalanceSelector extends fflib_SObjectSelector {
     public Schema.SObjectField[] getSObjectFieldList() {
         return new List<Schema.SObjectField>{
             Balance__c.Id,

@@ -1,4 +1,4 @@
-public class ProductSelector extends fflib_SObjectSelector {
+public inherited sharing class ProductSelector extends fflib_SObjectSelector {
     public Schema.SObjectField[] getSObjectFieldList() {
         return new List<Schema.SObjectField>{
             Product2.Id,
@@ -26,8 +26,8 @@ public class ProductSelector extends fflib_SObjectSelector {
     public class QueryParams {
         public Schema.SObjectField[] fieldList;
         public Integer limitBy = 1;
-        public String OrderField = 'CreatedDate';
-        public fflib_QueryFactory.SortOrder OrderSort = fflib_QueryFactory.SortOrder.DESCENDING;
+        public String orderField = 'CreatedDate';
+        public fflib_QueryFactory.SortOrder orderSort = fflib_QueryFactory.SortOrder.DESCENDING;
     }
 
     public Product2[] selectAll(
@@ -40,7 +40,8 @@ public class ProductSelector extends fflib_SObjectSelector {
         if (includePricebookEntries) {
             QueryParams p = new QueryParams();
             Map<String, Schema.SObjectField> fields = Schema.describeSObjects(
-                    new List<String>{ 'PricebookEntry' }
+                    new List<String>{ 'PricebookEntry' },
+                    SObjectDescribeOptions.DEFERRED
                 )[0]
                 .fields.getMap();
             p.fieldList = new List<Schema.SObjectField>{
@@ -52,7 +53,8 @@ public class ProductSelector extends fflib_SObjectSelector {
         if (includeBalances) {
             QueryParams p = new QueryParams();
             Map<String, Schema.SObjectField> fields = Schema.describeSObjects(
-                    new List<String>{ 'Balance__c' }
+                    new List<String>{ 'Balance__c' },
+                    SObjectDescribeOptions.DEFERRED
                 )[0]
                 .fields.getMap();
             p.fieldList = new List<Schema.SObjectField>{

@@ -1,9 +1,6 @@
 public with sharing class BalanceCreatorAsync extends QueueParameters implements Queueable {
     public Id recordId;
 
-    public BalanceCreatorAsync() {
-    }
-
     public void execute(QueueableContext ctx) {
         try {
             BalanceService.create(

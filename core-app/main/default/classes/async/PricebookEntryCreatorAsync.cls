@@ -2,6 +2,9 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
     private Id priceBookId;
     private Boolean isSuccess;
 
+    @testVisible
+    private Boolean doChainJob = true;
+
     public PricebookEntryCreatorAsync(Id priceBookId) {
         this.priceBookId = priceBookId;
     }
@@ -30,9 +33,6 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
             Log.get().publish(e);
         }
     }
-
-    @testVisible
-    private Boolean doChainJob = true;
 
     public void finish(Database.BatchableContext bc) {
         if (this.isSuccess && this.doChainJob) {

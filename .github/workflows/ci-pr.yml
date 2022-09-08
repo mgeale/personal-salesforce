@@ -63,13 +63,17 @@ jobs:
             - name: 'Code formatting verification with Prettier'
               run: npm run prettier:verify
 
-            # PMD Apex
-            - name: 'PMD Apex'
-              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd'
+            # Scanner PMD
+            - name: 'Code analyzer with Scanner PMD engine'
+              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd' --severity-threshold 1
 
-            # Lint LWC / Aura
-            - name: 'Lint Lightning Web Components / Aura Components'
-              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js'
+            # # Scanner DFA
+            # - name: 'Code analyzer with Scanner DFA engine'
+            #   run: sfdx scanner:run:dfa --target '**/classes/**/*.cls' --projectdir "./" --severity-threshold 1
+
+            # Scanner Lint
+            - name: 'Scanner Lint Lightning Web Components / Aura Components'
+              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js' --severity-threshold 1
 
             # LWC unit tests
             - name: 'Unit test Lightning Web Components'
