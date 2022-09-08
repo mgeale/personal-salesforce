@@ -82,4 +82,17 @@ public with sharing class LogMessage {
         );
         this.severity = LogSeverity.ERROR;
     }
+
+    public LogMessage(DMLException ex) {
+        this.message = String.format(
+            'Exception: [{0}] {1} \n Fields: {2} \n StackTrace: {3}',
+            new List<String>{
+                ex.getTypeName(),
+                ex.getDmlMessage(),
+                ex.getDmlFieldNames(),
+                ex.getStackTraceString()
+            }
+        );
+        this.severity = LogSeverity.ERROR;
+    }
 }

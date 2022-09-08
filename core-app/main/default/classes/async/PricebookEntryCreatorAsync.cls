@@ -25,6 +25,9 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
         try {
             PricebookEntryService.create(this.priceBookId, productInfos, false);
             this.isSuccess = true;
+        } catch (DMLException e) {
+            this.isSuccess = false;
+            Log.get().publish(e);
         } catch (Exception e) {
             this.isSuccess = false;
             Log.get().publish(e);
