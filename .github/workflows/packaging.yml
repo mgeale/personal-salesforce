@@ -111,9 +111,10 @@ jobs:
             - name: 'Populate auth file with SFDX_URL secret'
               shell: bash
               run: |
-                  if [${{ github.event.client_payload.branch }} == 'uat']; then
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  if [$branch == 'uat']; then
                     echo ${{ secrets.UAT_SFDX_URL}} > ./SFDX_URL.txt
-                  else if [${{ github.event.client_payload.branch }} == 'main']; then
+                  else if [$branch == 'main']; then
                     echo ${{ secrets.MAIN_SFDX_URL}} > ./SFDX_URL.txt
                   secretFileSize=$(wc -c "./SFDX_URL.txt" | awk '{print $1}')
                   if [ $secretFileSize == 1 ]; then
@@ -123,7 +124,9 @@ jobs:
 
             # Authenticate environment
             - name: 'Authenticate environment'
-              run: sfdx auth:sfdxurl:store -f ./SFDX_URL.txt -a ${{ github.event.client_payload.branch }} -d
+              run: |
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  sfdx auth:sfdxurl:store -f ./SFDX_URL.txt -a $branch -d
 
             # Remove auth file
             - name: 'Remove auth file'
@@ -141,19 +144,22 @@ jobs:
             - name: 'Install into scratch org - Core App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.CoreApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # Install into scratch org - Portfolio App
             - name: 'Install into scratch org - Portfolio App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.PortfolioApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # Install into scratch org - Mortgage App
             - name: 'Install into scratch org - Mortgage App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.MortgageApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # The main branch is protected, so we have to take a sequea for updating the README through a new PR
             - name: 'Create PR for new package versions'
