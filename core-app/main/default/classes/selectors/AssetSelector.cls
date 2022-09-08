@@ -1,4 +1,4 @@
-public class AssetSelector extends fflib_SObjectSelector {
+public inherited sharing class AssetSelector extends fflib_SObjectSelector {
     public Schema.SObjectField[] getSObjectFieldList() {
         return new List<Schema.SObjectField>{
             Asset.Id,

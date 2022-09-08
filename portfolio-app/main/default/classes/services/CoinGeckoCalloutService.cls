@@ -15,7 +15,6 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
             when 200 {
                 Parser p = parse(response.getBody());
                 for (String key : p.coins.keySet()) {
-                    System.debug(p.coins.get(key));
                     Double price = p.coins.get(key).currencies.get('aud');
                     responseMap.put(key, price);
                 }
@@ -68,7 +67,6 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 if (parser.getCurrentToken() == System.JSONToken.FIELD_NAME) {
                     String text = parser.getText();
                     if (parser.nextToken() != System.JSONToken.VALUE_NULL) {
-                        System.debug(parser.getDoubleValue());
                         this.currencies.put(text, parser.getDoubleValue());
                     }
                 }

@@ -58,7 +58,7 @@ public class CapitalGainsService_Test {
             WHERE Status = 'Sold' AND Amount_Taxed__c = NULL
         ];
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -125,7 +125,7 @@ public class CapitalGainsService_Test {
             WHERE Status = 'Sold' AND Amount_Taxed__c != 0
         ];
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -170,7 +170,7 @@ public class CapitalGainsService_Test {
         ];
 
         try {
-            Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+            CapitalGainsService.allocateToAsset(
                 new List<Capital_Gains__c>{
                     (Capital_Gains__c) TestDataFactory.createSObject(
                         'Capital_Gains__c',

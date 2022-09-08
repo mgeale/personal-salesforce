@@ -1,3 +1,4 @@
+@SuppressWarnings('PMD.AvoidDebugStatements')
 public without sharing class LogEventService {
     public static void create(Log__e[] events) {
         LogEvent__c[] logEvents = new List<LogEvent__c>{};
