@@ -7,7 +7,7 @@
   "salesforcedx-vscode-apex.java.home": "/usr/lib/jvm/java-11-openjdk-amd64",
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
-    "apexPMD.rulesets": [
+  "apexPMD.rulesets": [
     "ruleset.xml"
   ]
 }

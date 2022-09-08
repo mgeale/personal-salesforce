@@ -61,7 +61,7 @@ public class CapitalGainsService_Test {
         ];
         System.assert(!soldAssets.isEmpty());
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -131,7 +131,7 @@ public class CapitalGainsService_Test {
         ];
         System.assert(!soldAssets.isEmpty());
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -179,7 +179,7 @@ public class CapitalGainsService_Test {
         System.assert(!soldAssets.isEmpty());
 
         try {
-            Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+            CapitalGainsService.allocateToAsset(
                 new List<Capital_Gains__c>{
                     (Capital_Gains__c) TestDataFactory.createSObject(
                         'Capital_Gains__c',
