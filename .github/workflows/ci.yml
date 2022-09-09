@@ -155,4 +155,4 @@ jobs:
               with:
                   token: ${{ secrets.REPO_ACCESS_TOKEN }}
                   event-type: start-packaging
-                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }}, "branch": "${{ github.ref_name }}"}'
+                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }} }'
