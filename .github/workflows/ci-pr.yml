@@ -54,6 +54,7 @@ jobs:
                   restore-keys: |
                       npm-${{ env.cache-name }}-
                       npm-
+
             # Install npm dependencies for Prettier and Jest
             - name: 'Install npm dependencies'
               if: steps.cache-npm.outputs.cache-hit != 'true'
@@ -74,10 +75,6 @@ jobs:
             # Scanner Lint
             - name: 'Scanner Lint Lightning Web Components / Aura Components'
               run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js' --severity-threshold 1
-
-            # LWC unit tests
-            - name: 'Unit test Lightning Web Components'
-              run: npm run test:unit:coverage
 
     scratch-org-test:
         runs-on: ubuntu-latest
@@ -121,11 +118,7 @@ jobs:
 
             # Run Apex tests in scratch org
             - name: 'Run Apex tests'
-              run: sfdx force:apex:test:run -c -r human -d ./tests/apex -w 20
-
-            # Delete temporary test file that Codecov is unable to parse
-            - name: 'Delete coverage file (temporary step)'
-              run: rm ./tests/apex/test-result-707*-codecoverage.json
+              run: sfdx force:apex:test:run -c -r human -w 20
 
             # Housekeeping
             - name: 'Delete scratch org'
