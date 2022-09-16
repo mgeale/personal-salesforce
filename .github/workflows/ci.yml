@@ -74,7 +74,7 @@ jobs:
             #   run: sfdx scanner:run:dfa --target '**/classes/**/*.cls' --projectdir "./" --severity-threshold 1
 
             # Scanner Lint
-            - name: 'Scanner Lint Lightning Web Components / Aura Components'
+            - name: 'Lint Lightning Web Components / Aura Components'
               run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js' --severity-threshold 1
 
     scratch-org-test:
@@ -175,4 +175,4 @@ jobs:
               with:
                   token: ${{ secrets.REPO_ACCESS_TOKEN }}
                   event-type: start-packaging
-                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }} }'
+                  client-payload: '{ "ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "packageNames": ${{ steps.checkForChanges.outputs.changes }}, "branch": "${{ github.ref_name }}" }'

@@ -107,7 +107,7 @@ jobs:
             - name: 'Update sfdx-project.json and README'
               uses: trailheadapps/github-action-sfdx-packaging-updater@1.1.0
 
-            # Store secret for environment
+            # Store secret for target environment
             - name: 'Populate auth file with SFDX_URL secret'
               shell: bash
               run: |
@@ -123,8 +123,8 @@ jobs:
                       exit 1;
                   fi
 
-            # Authenticate environment
-            - name: 'Authenticate environment'
+            # Authenticate target environment
+            - name: 'Authenticate target environment'
               run: |
                   branch=$(echo '${{ github.event.client_payload.branch }}')
                   sfdx auth:sfdxurl:store -f ./SFDX_URL.txt -a $branch -d
