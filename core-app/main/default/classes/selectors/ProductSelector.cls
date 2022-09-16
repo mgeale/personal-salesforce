@@ -96,7 +96,7 @@ public inherited sharing class ProductSelector extends fflib_SObjectSelector {
         return (Product2[]) Database.query(parent.toSOQL());
     }
 
-    public Product2[] selectByFamily(String[] familyList) {
+    public Product2[] selectByFamily(Set<String> familyList) {
         return (Product2[]) Database.query(
             newQueryFactory().setCondition('Family IN :familyList').toSOQL()
         );

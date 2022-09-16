@@ -7,12 +7,17 @@ public class ProductService_Test {
             new Map<String, Object>{
                 'Name' => 'Prod1',
                 'ExternalId' => 'fake_id',
+                'Family' => 'Web3',
                 'IsActive' => true
             }
         );
         Product2 p2 = (Product2) TestDataFactory.createSObject(
             'Product2',
-            new Map<String, Object>{ 'Name' => 'Prod2', 'IsActive' => true }
+            new Map<String, Object>{
+                'Name' => 'Prod2',
+                'Family' => 'Stablecoin',
+                'IsActive' => true
+            }
         );
         Account a = (Account) TestDataFactory.createSObject('Account');
 
@@ -95,7 +100,7 @@ public class ProductService_Test {
         );
 
         Product2 product = [
-            SELECT id, ExternalId
+            SELECT id, ExternalId, Family
             FROM Product2
             WHERE Name = 'Prod1'
         ];
@@ -105,12 +110,13 @@ public class ProductService_Test {
         );
         System.assertEquals(14, info.total);
         System.assertEquals(178.05, info.price);
+        System.assertEquals('Web3', info.family);
     }
 
     @isTest
     public static void shouldConstructProductInfoWithoutCallout() {
         Product2 product = [
-            SELECT id, ExternalId
+            SELECT id, ExternalId, Family
             FROM Product2
             WHERE Name = 'Prod1'
         ];

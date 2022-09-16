@@ -4,7 +4,10 @@ public class PricebookEntryService_Test {
     static void makeData() {
         TestDataFactory.createSObject(
             'Product2',
-            new Map<String, Object>{ 'ExternalId' => 'fake_id' }
+            new Map<String, Object>{
+                'ExternalId' => 'fake_id',
+                'Family' => 'Web3'
+            }
         );
     }
 
@@ -22,12 +25,23 @@ public class PricebookEntryService_Test {
         );
 
         Id pricebookId = Test.getStandardPricebookId();
+        Pricebook2[] priceBooks = (Pricebook2[]) TestDataFactory.createSObjectList(
+            'PriceBook2',
+            new Map<String, Object>{
+                'id' => pricebookId,
+                'Product_Family__c' => 'Web3'
+            },
+            1,
+            false
+        );
 
         ProductService.ProductInfo[] products = new ProductService()
-            .convertToProductInfos([SELECT Id, ExternalId FROM Product2]);
+            .convertToProductInfos(
+                [SELECT Id, ExternalId, Family FROM Product2]
+            );
 
         Test.startTest();
-        PricebookEntryService.create(pricebookId, products, false);
+        new PricebookEntryService(true, false).create(priceBooks, products);
         Test.stopTest();
 
         List<PricebookEntry> result = [
@@ -57,12 +71,24 @@ public class PricebookEntryService_Test {
             '0'.repeat(11) +
             1;
 
+        Pricebook2[] priceBooks = (Pricebook2[]) TestDataFactory.createSObjectList(
+            'PriceBook2',
+            new Map<String, Object>{
+                'id' => pricebookId,
+                'Product_Family__c' => 'Web3'
+            },
+            1,
+            false
+        );
+
         ProductService.ProductInfo[] products = new ProductService()
-            .convertToProductInfos([SELECT Id, ExternalId FROM Product2]);
+            .convertToProductInfos(
+                [SELECT Id, ExternalId, Family FROM Product2]
+            );
 
         Test.startTest();
         try {
-            PricebookEntryService.create(pricebookId, products, true);
+            new PricebookEntryService().create(priceBooks, products);
             System.assert(false, 'Should not asset after Exception.');
         } catch (Exception e) {
             System.assert(e instanceof DmlException);
