@@ -1,15 +1,10 @@
-public with sharing class BalanceCreatorAsync extends QueueParameters implements Queueable {
-    public Id recordId;
-
+public with sharing class BalanceCreatorAsync extends InjectParameters implements Queueable {
     public void execute(QueueableContext ctx) {
         try {
-            BalanceService.create(
-                new PricebookEntrySelector()
-                    .selectByPricebookId(new Set<Id>{ this.recordId }),
-                false
-            );
-        } catch (DMLException e) {
-            Log.get().publish(e);
+            new BalanceService(true, false)
+                .create(
+                    new PricebookEntrySelector().selectByPricebookId(recordIds)
+                );
         } catch (Exception e) {
             Log.get().publish(e);
         }

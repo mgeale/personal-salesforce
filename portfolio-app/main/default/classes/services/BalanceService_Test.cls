@@ -33,11 +33,11 @@ public class BalanceService_Test {
         Id pricebookId = Test.getStandardPricebookId();
 
         Test.startTest();
-        BalanceService.create(
-            new PricebookEntrySelector()
-                .selectByPricebookId(new Set<Id>{ priceBookId }),
-            false
-        );
+        new BalanceService(true, false)
+            .create(
+                new PricebookEntrySelector()
+                    .selectByPricebookId(new Set<Id>{ priceBookId })
+            );
         Test.stopTest();
 
         List<Balance__c> result = [

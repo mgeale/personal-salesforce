@@ -1,5 +1,21 @@
 public with sharing class BalanceService {
-    public static void create(PricebookEntry[] entries, Boolean allOrNone) {
+    private Log logger;
+    private Boolean commitToDb;
+    private Boolean allOrNone;
+
+    public BalanceService() {
+        this.logger = Log.get();
+        this.commitToDb = true;
+        this.allOrNone = true;
+    }
+
+    public BalanceService(Boolean commitToDb, Boolean allOrNone) {
+        this.logger = Log.get();
+        this.commitToDb = commitToDb;
+        this.allOrNone = allOrNone;
+    }
+
+    public Balance__c[] create(PricebookEntry[] entries) {
         Id[] productIds = new List<Id>{};
         for (PricebookEntry e : entries) {
             productIds.add(e.Product2Id);
@@ -23,17 +39,25 @@ public with sharing class BalanceService {
             );
         }
 
-        for (Database.SaveResult sr : Database.insert(balances, allOrNone)) {
-            Log logger = Log.get();
-            if (!sr.isSuccess()) {
-                logger.add(
-                    String.format(
-                        'BalanceService.create {0}',
-                        new List<Object>{ sr.getErrors().toString() }
-                    )
-                );
+        if (this.commitToDb) {
+            for (
+                Database.SaveResult sr : Database.insert(
+                    balances,
+                    this.allOrNone
+                )
+            ) {
+                if (!sr.isSuccess()) {
+                    this.logger.add(
+                        String.format(
+                            'BalanceService.create {0}',
+                            new List<Object>{ sr.getErrors().toString() }
+                        )
+                    );
+                }
             }
-            logger.publish();
         }
+
+        this.logger.publish();
+        return balances;
     }
 }

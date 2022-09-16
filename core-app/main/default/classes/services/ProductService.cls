@@ -2,6 +2,7 @@ public with sharing class ProductService {
     public class ProductInfo {
         public Id productId;
         public String externalId;
+        public String family;
         public Decimal price {
             get {
                 if (price == null) {
@@ -26,10 +27,12 @@ public with sharing class ProductService {
         public ProductInfo(Product2 prod) {
             this.productId = prod.id;
             this.externalId = prod.ExternalId;
+            this.family = prod.Family;
         }
         public ProductInfo(Product2 prod, Decimal price) {
             this.productId = prod.id;
             this.externalId = prod.ExternalId;
+            this.family = prod.Family;
             this.price = price;
         }
     }
