@@ -30,11 +30,9 @@ public class CoinGeckoCalloutService_Test {
         );
         Test.setMock(HttpCalloutMock.class, mock);
 
-        Map<String, List<String>> params = new Map<String, List<String>>{
-            'externalIds' => new List<String>{ 'ethereum' }
-        };
-        Map<String, Decimal> result = CoinGeckoCalloutService.makeCallout(
-            params
+        Map<String, Decimal> result = CoinGeckoCalloutService.get(
+            new List<String>{ 'ethereum' },
+            new List<String>{ 'aud' }
         );
 
         System.assertEquals(10, result.size());

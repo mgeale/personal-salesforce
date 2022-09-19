@@ -56,12 +56,13 @@ public with sharing class ProductService {
     }
 
     private Map<String, Object> getPrices(String[] externalIds) {
-        CalloutService service = (CalloutService) di_Injector.Org.getInstance(
-            CalloutService.class,
+        PricesCalloutService service = (PricesCalloutService) di_Injector.Org.getInstance(
+            PricesCalloutService.class,
             (Object) null
         );
-        return (Map<String, Object>) service.makeCallout(
-            new Map<String, Object[]>{ 'externalIds' => externalIds }
+        return (Map<String, Object>) service.get(
+            new List<String>{ 'aud' },
+            externalIds
         );
     }
 }

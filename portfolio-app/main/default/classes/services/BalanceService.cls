@@ -4,9 +4,7 @@ public with sharing class BalanceService {
     private Boolean allOrNone;
 
     public BalanceService() {
-        this.logger = Log.get();
-        this.commitToDb = true;
-        this.allOrNone = true;
+        this(true, true);
     }
 
     public BalanceService(Boolean commitToDb, Boolean allOrNone) {
