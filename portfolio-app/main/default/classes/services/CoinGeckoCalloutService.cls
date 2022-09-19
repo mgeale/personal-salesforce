@@ -1,13 +1,18 @@
-public with sharing class CoinGeckoCalloutService extends RestClient implements CalloutService {
-    public static Map<String, Double> makeCallout(
-        Map<String, List<Object>> params
+public with sharing class CoinGeckoCalloutService extends RestClient implements PricesCalloutService {
+    public static Map<String, Double> get(
+        String[] externalIds,
+        String[] currencies
     ) {
         HttpResponse response = makeApiCall(
             'CoinGecko',
             HttpVerb.GET,
-            '/api/v3/simple/price?ids=' +
-            String.join(params.get('externalIds'), ',') +
-            '&vs_currencies=aud'
+            String.format(
+                '/api/v3/simple/price?ids={0}&vs_currencies={1}',
+                new List<Object>{
+                    String.join(externalIds, ','),
+                    String.join(currencies, ',')
+                }
+            )
         );
 
         Map<String, Double> responseMap = new Map<String, Double>();
