@@ -107,23 +107,27 @@ jobs:
             - name: 'Update sfdx-project.json and README'
               uses: trailheadapps/github-action-sfdx-packaging-updater@1.1.0
 
-            # Store secret for environment
+            # Store secret for target environment
             - name: 'Populate auth file with SFDX_URL secret'
               shell: bash
               run: |
-                  if [${{ github.event.client_payload.branch }} == 'uat']; then
-                    echo ${{ secrets.UAT_SFDX_URL}} > ./SFDX_URL.txt
-                  else if [${{ github.event.client_payload.branch }} == 'main']; then
-                    echo ${{ secrets.MAIN_SFDX_URL}} > ./SFDX_URL.txt
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  if [[ $branch == "uat" ]]; then
+                      echo ${{ secrets.UAT_SFDX_URL}} > ./SFDX_URL.txt
+                  elif [[ $branch == "main" ]]; then
+                      echo ${{ secrets.MAIN_SFDX_URL}} > ./SFDX_URL.txt
+                  fi
                   secretFileSize=$(wc -c "./SFDX_URL.txt" | awk '{print $1}')
-                  if [ $secretFileSize == 1 ]; then
+                  if [[ $secretFileSize == 1 ]]; then
                       echo "Missing SFDX_URL secret. Is this workflow running on a fork?";
                       exit 1;
                   fi
 
-            # Authenticate environment
-            - name: 'Authenticate environment'
-              run: sfdx auth:sfdxurl:store -f ./SFDX_URL.txt -a ${{ github.event.client_payload.branch }} -d
+            # Authenticate target environment
+            - name: 'Authenticate target environment'
+              run: |
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
+                  sfdx auth:sfdxurl:store -f ./SFDX_URL.txt -a $branch -d
 
             # Remove auth file
             - name: 'Remove auth file'
@@ -137,23 +141,26 @@ jobs:
                   versionIds=$(echo "$versionIds" | sed -E 's,@[0-9]+\.[0-9]+\.[0-9]+\-[0-9]+,,g')
                   echo "::set-output name=ids::$versionIds"
 
-            # Install into scratch org - Core App
-            - name: 'Install into scratch org - Core App'
+            # Install - Core App
+            - name: 'Install Core App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.CoreApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
-            # Install into scratch org - Portfolio App
-            - name: 'Install into scratch org - Portfolio App'
+            # Install - Portfolio App
+            - name: 'Install Portfolio App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.PortfolioApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
-            # Install into scratch org - Mortgage App
-            - name: 'Install into scratch org - Mortgage App'
+            # Install - Mortgage App
+            - name: 'Install Mortgage App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.MortgageApp')
-                  sfdx force:package:install --package $versionId -w 10 -u ${{ github.event.client_payload.branch }} -r
+                  branch=$(echo '${{ github.event.branch }}')
+                  sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # The main branch is protected, so we have to take a sequea for updating the README through a new PR
             - name: 'Create PR for new package versions'
@@ -192,8 +199,3 @@ jobs:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   number: ${{ env.PULL_REQUEST_NUMBER }}
                   method: squash
-
-            # Housekeeping
-            - name: 'Delete scratch org'
-              if: always()
-              run: sfdx force:org:delete -p -u scratch-org

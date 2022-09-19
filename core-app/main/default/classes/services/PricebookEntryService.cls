@@ -1,31 +1,58 @@
 public with sharing class PricebookEntryService {
-    public static void create(
-        Id priceBookId,
-        ProductService.ProductInfo[] products,
-        Boolean allOrNone
+    private Log logger;
+    private Boolean commitToDb;
+    private Boolean allOrNone;
+
+    public PricebookEntryService() {
+        this.logger = Log.get();
+        this.commitToDb = true;
+        this.allOrNone = true;
+    }
+
+    public PricebookEntryService(Boolean commitToDb, Boolean allOrNone) {
+        this.logger = Log.get();
+        this.commitToDb = commitToDb;
+        this.allOrNone = allOrNone;
+    }
+
+    public PricebookEntry[] create(
+        Pricebook2[] priceBooks,
+        ProductService.ProductInfo[] productInfos
     ) {
         PricebookEntry[] entries = new List<PricebookEntry>{};
-        for (ProductService.ProductInfo p : products) {
-            entries.add(
-                new PricebookEntry(
-                    Product2Id = p.productId,
-                    UnitPrice = p.price,
-                    Pricebook2Id = priceBookId
-                )
-            );
+        for (Pricebook2 book : priceBooks) {
+            for (ProductService.ProductInfo p : productInfos) {
+                if (book.Product_Family__c == p.family) {
+                    entries.add(
+                        new PricebookEntry(
+                            Product2Id = p.productId,
+                            UnitPrice = p.price,
+                            Pricebook2Id = book.id
+                        )
+                    );
+                }
+            }
         }
 
-        for (Database.SaveResult sr : Database.insert(entries, allOrNone)) {
-            Log logger = Log.get();
-            if (!sr.isSuccess()) {
-                logger.add(
-                    String.format(
-                        'PricebookEntry.create {0}',
-                        new List<Object>{ sr.getErrors().toString() }
-                    )
-                );
+        if (this.commitToDb) {
+            for (
+                Database.SaveResult sr : Database.insert(
+                    entries,
+                    this.allOrNone
+                )
+            ) {
+                if (!sr.isSuccess()) {
+                    this.logger.add(
+                        String.format(
+                            'PricebookEntryService.create {0}',
+                            new List<Object>{ sr.getErrors().toString() }
+                        )
+                    );
+                }
             }
-            logger.publish();
         }
+
+        this.logger.publish();
+        return entries;
     }
 }

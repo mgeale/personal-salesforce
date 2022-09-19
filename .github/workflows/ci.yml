@@ -17,9 +17,29 @@ jobs:
     format-lint-lwc-tests:
         runs-on: ubuntu-latest
         steps:
+            # Install Salesforce CLI
+            - name: 'Install Salesforce CLI'
+              run: |
+                  wget https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz
+                  mkdir ~/sfdx
+                  tar xJf sfdx-linux-x64.tar.xz -C ~/sfdx --strip-components 1
+                  echo "$HOME/sfdx/bin" >> $GITHUB_PATH
+                  ~/sfdx/bin/sfdx version
+
             # Checkout the source code
             - name: 'Checkout source code'
               uses: actions/checkout@v2
+
+            # Install JDK
+            - name: 'Install JDK'
+              uses: actions/setup-java@v3
+              with:
+                  distribution: 'temurin'
+                  java-version: '17'
+
+            # Install SFDX Scanner
+            - name: 'Install SFDX Scanner'
+              run: sfdx plugins:install @salesforce/sfdx-scanner@latest-pilot
 
             # Install Volta to enforce proper node and package manager versions
             - name: 'Install Volta'
@@ -45,13 +65,17 @@ jobs:
             - name: 'Code formatting verification with Prettier'
               run: npm run prettier:verify
 
-            # Lint LWC / Aura
-            - name: 'Lint Lightning Web Components / Aura Components'
-              run: npm run lint
+            # Scanner PMD
+            - name: 'Code analyzer with Scanner PMD engine'
+              run: sfdx scanner:run --target '**/classes/**/*.cls' --pmdconfig './ruleset.xml' --engine 'pmd' --severity-threshold 1
 
-            # LWC unit tests
-            - name: 'Unit test Lightning Web Components'
-              run: npm run test:unit:coverage
+            # # Scanner DFA
+            # - name: 'Code analyzer with Scanner DFA engine'
+            #   run: sfdx scanner:run:dfa --target '**/classes/**/*.cls' --projectdir "./" --severity-threshold 1
+
+            # Scanner Lint
+            - name: 'Lint Lightning Web Components / Aura Components'
+              run: sfdx scanner:run --target '**/lwc/**/*.js' --eslintconfig 'core-app/main/default/lwc/.eslintrc.json' --engine 'eslint,retire-js' --severity-threshold 1
 
     scratch-org-test:
         runs-on: ubuntu-latest
@@ -96,11 +120,7 @@ jobs:
 
             # Run Apex tests in scratch org
             - name: 'Run Apex tests'
-              run: sfdx force:apex:test:run -c -r human -d ./tests/apex -w 20
-
-            # Delete temporary test file that Codecov is unable to parse
-            - name: 'Delete coverage file (temporary step)'
-              run: rm ./tests/apex/test-result-707*-codecoverage.json
+              run: sfdx force:apex:test:run -c -r human -w 20
 
             # Housekeeping
             - name: 'Delete scratch org'
