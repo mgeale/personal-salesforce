@@ -145,21 +145,21 @@ jobs:
             - name: 'Install Core App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.CoreApp')
-                  branch=$(echo '${{ github.event.branch }}')
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
                   sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # Install - Portfolio App
             - name: 'Install Portfolio App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.PortfolioApp')
-                  branch=$(echo '${{ github.event.branch }}')
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
                   sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # Install - Mortgage App
             - name: 'Install Mortgage App'
               run: |
                   versionId=$(echo '${{ steps.packageVersions.outputs.ids }}' | jq -r '.MortgageApp')
-                  branch=$(echo '${{ github.event.branch }}')
+                  branch=$(echo '${{ github.event.client_payload.branch }}')
                   sfdx force:package:install --package $versionId -w 10 -u $branch -r
 
             # The main branch is protected, so we have to take a sequea for updating the README through a new PR
