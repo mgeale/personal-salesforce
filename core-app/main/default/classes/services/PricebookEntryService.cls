@@ -4,9 +4,7 @@ public with sharing class PricebookEntryService {
     private Boolean allOrNone;
 
     public PricebookEntryService() {
-        this.logger = Log.get();
-        this.commitToDb = true;
-        this.allOrNone = true;
+        this(true, true);
     }
 
     public PricebookEntryService(Boolean commitToDb, Boolean allOrNone) {

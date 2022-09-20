@@ -1,3 +1,4 @@
+@SuppressWarnings('PMD.OperationWithLimitsInLoop')
 public without sharing class PriceBookTriggerHandler extends TriggerHandler {
     Pricebook2[] incomingRecords;
 

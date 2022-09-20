@@ -15,11 +15,11 @@ public class PricebookEntryService_Test {
     public static void shouldSavePricesBookEntries() {
         di_Injector.Org.Bindings.set(
             new di_Module()
-                .bind(CalloutService.class)
+                .bind(PricesCalloutService.class)
                 .toObject(
                     Test.createStub(
-                        CalloutService.class,
-                        new CalloutServiceStub()
+                        PricesCalloutService.class,
+                        new PricesCalloutServiceStub()
                     )
                 )
         );
@@ -56,11 +56,11 @@ public class PricebookEntryService_Test {
     public static void shouldFailToSavePricesBookEntries() {
         di_Injector.Org.Bindings.set(
             new di_Module()
-                .bind(CalloutService.class)
+                .bind(PricesCalloutService.class)
                 .toObject(
                     Test.createStub(
-                        CalloutService.class,
-                        new CalloutServiceStub()
+                        PricesCalloutService.class,
+                        new PricesCalloutServiceStub()
                     )
                 )
         );
@@ -96,7 +96,7 @@ public class PricebookEntryService_Test {
         Test.stopTest();
     }
 
-    private class CalloutServiceStub implements System.StubProvider {
+    private class PricesCalloutServiceStub implements System.StubProvider {
         public Map<String, Object> handleMethodCall(
             Object stubbedObject,
             String stubbedMethodName,
