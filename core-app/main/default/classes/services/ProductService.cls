@@ -2,6 +2,7 @@ public with sharing class ProductService {
     public class ProductInfo {
         public Id productId;
         public String externalId;
+        public String family;
         public Decimal price {
             get {
                 if (price == null) {
@@ -26,10 +27,12 @@ public with sharing class ProductService {
         public ProductInfo(Product2 prod) {
             this.productId = prod.id;
             this.externalId = prod.ExternalId;
+            this.family = prod.Family;
         }
         public ProductInfo(Product2 prod, Decimal price) {
             this.productId = prod.id;
             this.externalId = prod.ExternalId;
+            this.family = prod.Family;
             this.price = price;
         }
     }
@@ -53,12 +56,13 @@ public with sharing class ProductService {
     }
 
     private Map<String, Object> getPrices(String[] externalIds) {
-        CalloutService service = (CalloutService) di_Injector.Org.getInstance(
-            CalloutService.class,
+        PricesCalloutService service = (PricesCalloutService) di_Injector.Org.getInstance(
+            PricesCalloutService.class,
             (Object) null
         );
-        return (Map<String, Object>) service.makeCallout(
-            new Map<String, Object[]>{ 'externalIds' => externalIds }
+        return (Map<String, Object>) service.get(
+            new List<String>{ 'aud' },
+            externalIds
         );
     }
 }

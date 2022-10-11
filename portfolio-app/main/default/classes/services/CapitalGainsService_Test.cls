@@ -2,9 +2,7 @@
 public class CapitalGainsService_Test {
     @TestSetup
     static void makeData() {
-        Trigger_Settings__c triggerSettings = Trigger_Settings__c.getOrgDefaults();
-        triggerSettings.Disable_Capital_Gains_Trigger__c = true;
-        upsert triggerSettings;
+        TriggerHandler.bypass('CapitalGainsTriggerHandler');
 
         Account acc = (Account) TestDataFactory.createSObject('Account');
         Product2 product = (Product2) TestDataFactory.createSObject('Product2');
@@ -42,7 +40,7 @@ public class CapitalGainsService_Test {
             }
         );
 
-        // required because trigger disabled
+        // required because trigger bypassed
         update new Asset(id = purchaseAssets[0].id, Amount_Taxed__c = 55);
         update new Asset(id = soldAssets[0].id, Amount_Taxed__c = 55);
     }
@@ -54,13 +52,16 @@ public class CapitalGainsService_Test {
             FROM Asset
             WHERE Status = 'Purchase' AND Amount_Taxed__c = NULL
         ];
+        System.assert(!purchaseAssets.isEmpty());
+
         Asset[] soldAssets = [
             SELECT id, Amount_Taxed__c
             FROM Asset
             WHERE Status = 'Sold' AND Amount_Taxed__c = NULL
         ];
+        System.assert(!soldAssets.isEmpty());
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -119,15 +120,18 @@ public class CapitalGainsService_Test {
         Asset[] purchaseAssets = [
             SELECT id, Amount_Taxed__c
             FROM Asset
-            WHERE Status = 'Purchase' AND Amount_Taxed__c != 0
+            WHERE Status = 'Purchase' AND Amount_Taxed__c > 0
         ];
+        System.assert(!purchaseAssets.isEmpty());
+
         Asset[] soldAssets = [
             SELECT id, Amount_Taxed__c
             FROM Asset
-            WHERE Status = 'Sold' AND Amount_Taxed__c != 0
+            WHERE Status = 'Sold' AND Amount_Taxed__c > 0
         ];
+        System.assert(!soldAssets.isEmpty());
 
-        Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+        CapitalGainsService.allocateToAsset(
             new List<Capital_Gains__c>{
                 (Capital_Gains__c) TestDataFactory.createSObject(
                     'Capital_Gains__c',
@@ -163,16 +167,19 @@ public class CapitalGainsService_Test {
         Asset[] purchaseAssets = [
             SELECT id, Amount_Taxed__c
             FROM Asset
-            WHERE Status = 'Purchase' AND Amount_Taxed__c != 0
+            WHERE Status = 'Purchase' AND Amount_Taxed__c > 0
         ];
+        System.assert(!purchaseAssets.isEmpty());
+
         Asset[] soldAssets = [
             SELECT id, Amount_Taxed__c
             FROM Asset
-            WHERE Status = 'Sold' AND Amount_Taxed__c != 0
+            WHERE Status = 'Sold' AND Amount_Taxed__c > 0
         ];
+        System.assert(!soldAssets.isEmpty());
 
         try {
-            Capital_Gains__c[] results = CapitalGainsService.allocateToAsset(
+            CapitalGainsService.allocateToAsset(
                 new List<Capital_Gains__c>{
                     (Capital_Gains__c) TestDataFactory.createSObject(
                         'Capital_Gains__c',

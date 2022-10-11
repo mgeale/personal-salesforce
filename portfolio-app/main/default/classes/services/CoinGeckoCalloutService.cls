@@ -1,13 +1,18 @@
-public with sharing class CoinGeckoCalloutService extends RestClient implements CalloutService {
-    public static Map<String, Double> makeCallout(
-        Map<String, List<Object>> params
+public with sharing class CoinGeckoCalloutService extends RestClient implements PricesCalloutService {
+    public static Map<String, Double> get(
+        String[] externalIds,
+        String[] currencies
     ) {
         HttpResponse response = makeApiCall(
             'CoinGecko',
             HttpVerb.GET,
-            '/api/v3/simple/price?ids=' +
-            String.join(params.get('externalIds'), ',') +
-            '&vs_currencies=aud'
+            String.format(
+                '/api/v3/simple/price?ids={0}&vs_currencies={1}',
+                new List<Object>{
+                    String.join(externalIds, ','),
+                    String.join(currencies, ',')
+                }
+            )
         );
 
         Map<String, Double> responseMap = new Map<String, Double>();
@@ -15,7 +20,6 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
             when 200 {
                 Parser p = parse(response.getBody());
                 for (String key : p.coins.keySet()) {
-                    System.debug(p.coins.get(key));
                     Double price = p.coins.get(key).currencies.get('aud');
                     responseMap.put(key, price);
                 }
@@ -24,7 +28,7 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 Log.get()
                     .publish(
                         String.format(
-                            'CoinGeckoCalloutService failed {0}. {1}',
+                            'CoinGeckoCalloutService.makeCallout {0} {1}',
                             new List<Object>{
                                 response.getStatusCode(),
                                 response.getBody()
@@ -68,7 +72,6 @@ public with sharing class CoinGeckoCalloutService extends RestClient implements 
                 if (parser.getCurrentToken() == System.JSONToken.FIELD_NAME) {
                     String text = parser.getText();
                     if (parser.nextToken() != System.JSONToken.VALUE_NULL) {
-                        System.debug(parser.getDoubleValue());
                         this.currencies.put(text, parser.getDoubleValue());
                     }
                 }

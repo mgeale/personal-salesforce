@@ -1,5 +1,19 @@
 public with sharing class BalanceService {
-    public static void create(PricebookEntry[] entries, Boolean allOrNone) {
+    private Log logger;
+    private Boolean commitToDb;
+    private Boolean allOrNone;
+
+    public BalanceService() {
+        this(true, true);
+    }
+
+    public BalanceService(Boolean commitToDb, Boolean allOrNone) {
+        this.logger = Log.get();
+        this.commitToDb = commitToDb;
+        this.allOrNone = allOrNone;
+    }
+
+    public Balance__c[] create(PricebookEntry[] entries) {
         Id[] productIds = new List<Id>{};
         for (PricebookEntry e : entries) {
             productIds.add(e.Product2Id);
@@ -10,7 +24,7 @@ public with sharing class BalanceService {
         Balance__c[] balances = new List<Balance__c>{};
         for (PricebookEntry e : entries) {
             Decimal amount = totalAmounts.get(e.Product2Id);
-            if (amount == 0) {
+            if (amount == 0 || amount == null) {
                 continue;
             }
             balances.add(
@@ -23,17 +37,25 @@ public with sharing class BalanceService {
             );
         }
 
-        for (Database.SaveResult sr : Database.insert(balances, allOrNone)) {
-            Log logger = Log.get();
-            if (!sr.isSuccess()) {
-                logger.add(
-                    String.format(
-                        'Failed to create Balance__c. Errors {0}.',
-                        new List<Object>{ sr.getErrors().toString() }
-                    )
-                );
+        if (this.commitToDb) {
+            for (
+                Database.SaveResult sr : Database.insert(
+                    balances,
+                    this.allOrNone
+                )
+            ) {
+                if (!sr.isSuccess()) {
+                    this.logger.add(
+                        String.format(
+                            'BalanceService.create {0}',
+                            new List<Object>{ sr.getErrors().toString() }
+                        )
+                    );
+                }
             }
-            logger.publish();
         }
+
+        this.logger.publish();
+        return balances;
     }
 }

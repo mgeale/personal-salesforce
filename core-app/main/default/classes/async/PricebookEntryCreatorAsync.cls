@@ -1,18 +1,27 @@
 public with sharing class PricebookEntryCreatorAsync implements Database.Batchable<ProductService.ProductInfo>, Database.AllowsCallouts, Database.Stateful, Database.RaisesPlatformEvents {
-    private Id priceBookId;
+    private Pricebook2[] priceBooks;
     private Boolean isSuccess;
 
-    public PricebookEntryCreatorAsync(Id priceBookId) {
-        this.priceBookId = priceBookId;
+    private PricebookEntryService entryService;
+
+    @testVisible
+    private Boolean doChainJob = true;
+
+    public PricebookEntryCreatorAsync(Pricebook2[] priceBooks) {
+        this.priceBooks = priceBooks;
+        this.entryService = new PricebookEntryService(true, false);
     }
 
     public ProductService.ProductInfo[] start(Database.BatchableContext bc) {
-        ProductService service = new ProductService();
-        ProductSelector selector = new ProductSelector();
+        Set<String> productFamilies = new Set<String>();
+        for (Pricebook2 book : this.priceBooks) {
+            productFamilies.add(book.Product_Family__c);
+        }
 
-        return service.convertToProductInfos(
-            selector.selectByFamily(new List<String>{ 'Web3' })
-        );
+        return new ProductService()
+            .convertToProductInfos(
+                new ProductSelector().selectByFamily(productFamilies)
+            );
     }
 
     public void execute(
@@ -20,7 +29,7 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
         ProductService.ProductInfo[] productInfos
     ) {
         try {
-            PricebookEntryService.create(this.priceBookId, productInfos, false);
+            this.entryService.create(this.priceBooks, productInfos);
             this.isSuccess = true;
         } catch (Exception e) {
             this.isSuccess = false;
@@ -28,17 +37,19 @@ public with sharing class PricebookEntryCreatorAsync implements Database.Batchab
         }
     }
 
-    @testVisible
-    private Boolean doChainJob = true;
-
     public void finish(Database.BatchableContext bc) {
         if (this.isSuccess && this.doChainJob) {
-            QueueParameters queue = (QueueParameters) Type.forName(
+            InjectParameters balanceCreator = (InjectParameters) Type.forName(
                     'BalanceCreatorAsync'
                 )
                 .newInstance();
-            queue.setRecordId(this.priceBookId);
-            System.enqueueJob(queue);
+
+            Set<ID> ids = new Set<ID>();
+            for (Pricebook2 book : this.priceBooks) {
+                ids.add(book.id);
+            }
+            balanceCreator.setRecordIds(ids);
+            System.enqueueJob(balanceCreator);
         }
     }
 }
