@@ -61,8 +61,8 @@ public with sharing class ProductService {
             (Object) null
         );
         return (Map<String, Object>) service.get(
-            new List<String>{ 'aud' },
-            externalIds
+            externalIds,
+            new List<String>{ 'aud' }
         );
     }
 }
