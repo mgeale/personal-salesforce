@@ -43,7 +43,7 @@
         <inputAssignments>
             <field>Product_Family__c</field>
             <value>
-                <elementReference>Web3</elementReference>
+                <stringValue>Web3</stringValue>
             </value>
         </inputAssignments>
         <object>Pricebook2</object>
