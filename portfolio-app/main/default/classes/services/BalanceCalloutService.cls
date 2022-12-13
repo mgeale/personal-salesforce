@@ -1,4 +1,5 @@
 public with sharing class BalanceCalloutService extends RestClient implements ExternalDataSource {
+    @SuppressWarnings('PMD.EmptyStatementBlock')
     public BalanceCalloutService() {
     }
 
