@@ -40,6 +40,12 @@
                 <elementReference>$Flow.CurrentDate</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <field>Product_Family__c</field>
+            <value>
+                <elementReference>Web3</elementReference>
+            </value>
+        </inputAssignments>
         <object>Pricebook2</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
