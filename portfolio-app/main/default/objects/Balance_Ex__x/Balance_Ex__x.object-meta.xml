@@ -118,7 +118,7 @@
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
-    <externalDataSource>Home_Server</externalDataSource>
+    <externalDataSource>HomeServer</externalDataSource>
     <externalName>Balance</externalName>
     <label>Balance</label>
     <pluralLabel>Balances</pluralLabel>
