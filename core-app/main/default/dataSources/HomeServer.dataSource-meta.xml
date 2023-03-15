@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ExternalDataSource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customConfiguration
+    >{&quot;noIdMapping&quot;:&quot;false&quot;}</customConfiguration>
+    <endpoint>https://bouvardi.xyz/query</endpoint>
+    <isWritable>true</isWritable>
+    <label>HomeServer</label>
+    <principalType>NamedUser</principalType>
+    <protocol>Password</protocol>
+    <type>HomeServerProvider</type>
+    <username>admin@unknown.com</username>
+</ExternalDataSource>
