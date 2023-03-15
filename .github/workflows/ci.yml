@@ -39,7 +39,7 @@ jobs:
 
             # Install SFDX Scanner
             - name: 'Install SFDX Scanner'
-              run: sfdx plugins:install @salesforce/sfdx-scanner@latest-pilot
+              run: sfdx plugins:install @salesforce/sfdx-scanner
 
             # Install Volta to enforce proper node and package manager versions
             - name: 'Install Volta'
