@@ -67,7 +67,10 @@ public class PricebookEntryService_Test {
 
         // fake id to trigger DmlException
         Id pricebookId =
-            PricebookEntry.SObjectType.getDescribe().getKeyPrefix() +
+            PricebookEntry.SObjectType.getDescribe(
+                    SObjectDescribeOptions.DEFERRED
+                )
+                .getKeyPrefix() +
             '0'.repeat(11) +
             1;
 

@@ -10,6 +10,7 @@
    <exclude-pattern>.*/dilib/.*</exclude-pattern>
    <exclude-pattern>.*/fflib-common/.*</exclude-pattern>
    <exclude-pattern>.*/fflib-mocks/.*</exclude-pattern>
+   <exclude-pattern>.*/gql-client/.*</exclude-pattern>
    <exclude-pattern>.*/TestDataFactory.cls</exclude-pattern>
 
    <!-- DESIGN -->
