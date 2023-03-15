@@ -9,5 +9,5 @@
     <protocol>Password</protocol>
     <type>HomeServerProvider</type>
     <username>admin@unknown.com</username>
-    <password />
+    <password>fake_password_to_replace</password>
 </ExternalDataSource>
