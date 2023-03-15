@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Balance__c</fullName>
     <description>Balance</description>
-    <externalDeveloperName>Balance</externalDeveloperName>
+    <externalDeveloperName>balance</externalDeveloperName>
     <externalId>false</externalId>
     <isFilteringDisabled>false</isFilteringDisabled>
     <isNameField>false</isNameField>
@@ -10,7 +10,7 @@
     <label>Balance</label>
     <precision>18</precision>
     <required>false</required>
-    <scale>9</scale>
+    <scale>2</scale>
     <type>Number</type>
     <unique>false</unique>
 </CustomField>

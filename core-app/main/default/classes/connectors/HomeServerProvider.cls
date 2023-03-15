@@ -1,10 +1,7 @@
 global class HomeServerProvider extends DataSource.Provider {
     override global List<DataSource.AuthenticationCapability> getAuthenticationCapabilities() {
         return new List<DataSource.AuthenticationCapability>{
-            DataSource.AuthenticationCapability.ANONYMOUS,
-            DataSource.AuthenticationCapability.BASIC,
-            DataSource.AuthenticationCapability.CERTIFICATE,
-            DataSource.AuthenticationCapability.OAUTH
+            DataSource.AuthenticationCapability.BASIC
         };
     }
 

@@ -10,6 +10,7 @@ package.xml
 **settings
 **reports
 **dashboards
+**listViews
 
 # LWC configuration files
 **/jsconfig.json

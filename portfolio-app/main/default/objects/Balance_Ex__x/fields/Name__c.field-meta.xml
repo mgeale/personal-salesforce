@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Balance_AUD__c</fullName>
-    <description>Balance AUD</description>
-    <externalDeveloperName>Balance AUD</externalDeveloperName>
+    <fullName>Name__c</fullName>
+    <description>Name</description>
+    <externalDeveloperName>name</externalDeveloperName>
     <externalId>false</externalId>
     <isFilteringDisabled>false</isFilteringDisabled>
-    <isNameField>false</isNameField>
+    <isNameField>true</isNameField>
     <isSortingDisabled>false</isSortingDisabled>
-    <label>Balance AUD</label>
-    <precision>18</precision>
+    <label>Name</label>
+    <length>255</length>
     <required>false</required>
-    <scale>2</scale>
-    <type>Number</type>
+    <type>Text</type>
     <unique>false</unique>
 </CustomField>

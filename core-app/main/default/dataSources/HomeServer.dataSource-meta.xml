@@ -2,9 +2,11 @@
 <ExternalDataSource xmlns="http://soap.sforce.com/2006/04/metadata">
     <customConfiguration
     >{&quot;noIdMapping&quot;:&quot;false&quot;}</customConfiguration>
+    <endpoint>https://bouvardi.xyz/query</endpoint>
     <isWritable>true</isWritable>
-    <label>Home Server</label>
-    <principalType>Anonymous</principalType>
-    <protocol>NoAuthentication</protocol>
+    <label>HomeServer</label>
+    <principalType>NamedUser</principalType>
+    <protocol>Password</protocol>
     <type>HomeServerProvider</type>
+    <username>admin@unknown.com</username>
 </ExternalDataSource>
