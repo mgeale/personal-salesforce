@@ -9,4 +9,5 @@
     <protocol>Password</protocol>
     <type>HomeServerProvider</type>
     <username>admin@unknown.com</username>
+    <password />
 </ExternalDataSource>
