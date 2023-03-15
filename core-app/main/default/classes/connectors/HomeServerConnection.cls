@@ -1,3 +1,4 @@
+@SuppressWarnings('PMD.AvoidGlobalModifier')
 global class HomeServerConnection extends DataSource.Connection {
     private HomeServerCalloutService calloutService;
 
