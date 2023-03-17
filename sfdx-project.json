@@ -41,8 +41,8 @@
         "CoreApp": "0Ho2w000000CaupCAC",
         "PortfolioApp": "0Ho2w000000CauuCAC",
         "MortgageApp": "0Ho2w000000CauzCAC",
-        "PortfolioApp@0.1.0-22": "04t2w0000093OSDAA2",
-        "CoreApp@0.1.0-26": "04t2w0000093PN2AAM",
-        "MortgageApp@0.1.0-3": "04t2w0000093PN7AAM"
+        "MortgageApp@0.1.0-3": "04t2w0000093PN7AAM",
+        "CoreApp@0.1.0-27": "04t2w0000093QVSAA2",
+        "PortfolioApp@0.1.0-25": "04t2w0000093QVXAA2"
     }
 }
