@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Date__c</fullName>
-    <description>Date</description>
-    <externalDeveloperName>date</externalDeveloperName>
+    <fullName>CreatedDate__c</fullName>
+    <externalDeveloperName>created</externalDeveloperName>
     <externalId>false</externalId>
     <isFilteringDisabled>false</isFilteringDisabled>
     <isNameField>false</isNameField>
     <isSortingDisabled>false</isSortingDisabled>
-    <label>Date</label>
-    <length>255</length>
+    <label>CreatedDate</label>
     <required>false</required>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>DateTime</type>
 </CustomField>

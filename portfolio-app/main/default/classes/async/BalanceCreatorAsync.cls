@@ -1,10 +1,9 @@
 public with sharing class BalanceCreatorAsync extends InjectParameters implements Queueable {
     public void execute(QueueableContext ctx) {
         try {
-            new BalanceService(true, false)
-                .create(
-                    new PricebookEntrySelector().selectByPricebookId(recordIds)
-                );
+            BalanceService.create(
+                new PricebookEntrySelector().selectByPricebookId(recordIds)
+            );
         } catch (Exception e) {
             Log.get().publish(e);
         }

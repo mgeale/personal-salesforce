@@ -11,7 +11,7 @@
     <label>Mortgage</label>
     <navType>Standard</navType>
     <tabs>Interest_Rate__c</tabs>
-    <tabs>Mortgage_Transaction__c</tabs>
+    <tabs>Transaction__x</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Mortgage_UtilityBar</utilityBar>
 </CustomApplication>

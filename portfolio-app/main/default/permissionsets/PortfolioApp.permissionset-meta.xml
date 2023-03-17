@@ -7,7 +7,7 @@
     <hasActivationRequired>false</hasActivationRequired>
     <label>PortfolioApp</label>
     <tabSettings>
-        <tab>Balance__c</tab>
+        <tab>Balance__x</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

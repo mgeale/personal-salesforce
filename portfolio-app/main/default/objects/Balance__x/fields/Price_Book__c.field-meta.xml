@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>PriceBook__c</fullName>
+    <fullName>Price_Book__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <description>PriceBook</description>
     <externalDeveloperName>pricebookid</externalDeveloperName>

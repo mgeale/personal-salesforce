@@ -22,7 +22,7 @@ export default class LineChart extends LightningElement {
             this.balances = data.map((item) => {
                 return {
                     date: item.CreatedDate,
-                    balanceAUD: item.Balance_AUD__c
+                    balanceAUD: item.BalanceAUD__c
                 };
             });
             this.chart.data = {

@@ -16,7 +16,7 @@
     <tabs>standard-Asset</tabs>
     <tabs>standard-Product2</tabs>
     <tabs>standard-Pricebook2</tabs>
-    <tabs>Balance__c</tabs>
+    <tabs>Balance__x</tabs>
     <tabs>Capital_Gains__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Portfolio_UtilityBar</utilityBar>
