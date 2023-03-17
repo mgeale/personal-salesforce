@@ -15,6 +15,10 @@ public with sharing class BalanceService {
             }
             balances.add(
                 new Balance__x(
+                    Name__c = String.format(
+                        'BAL-{0}-{1}.',
+                        new List<Object>{ e.ProductCode, Date.today().format() }
+                    ),
                     Price_Book__c = e.Pricebook2Id,
                     Product__c = e.Product2Id,
                     Balance__c = amount,
