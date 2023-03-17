@@ -4,7 +4,8 @@ public inherited sharing class PricebookEntrySelector extends fflib_SObjectSelec
             PricebookEntry.Id,
             PricebookEntry.Product2Id,
             PricebookEntry.Pricebook2Id,
-            PricebookEntry.UnitPrice
+            PricebookEntry.UnitPrice,
+            PricebookEntry.ProductCode
         };
     }
 
